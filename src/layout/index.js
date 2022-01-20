@@ -7,8 +7,10 @@ import Footer from './Footer';
 function Layout({ children }) {
   return (
     <main className="dark:bg-gray-800 bg-white relative h-screen">
-      <Navbar />
-      <BrowserRouter>{children}</BrowserRouter>
+      <BrowserRouter>
+        <Navbar />
+        {children}
+      </BrowserRouter>
       <Footer />
       <Toaster
         toastOptions={{

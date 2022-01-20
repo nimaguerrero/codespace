@@ -1,16 +1,90 @@
 import Cards from 'components/Cards';
+import { useState } from 'react';
 
-function Projects() {
+function Home() {
+  const [projects, useProjects] = useState([
+    {
+      name: 'Carousel',
+      tag: 'componente',
+      language: 'react',
+      price: 1,
+    },
+    {
+      name: 'Calculadora',
+      tag: 'componente',
+      language: 'java',
+      price: 0,
+    },
+    {
+      name: 'Control de pagos de alumnos',
+      tag: 'proyecto',
+      language: 'c',
+      price: 2,
+    },
+    {
+      name: 'Dashboard Plantilla sin links',
+      tag: 'proyecto',
+      language: 'angular',
+      price: 20,
+    },
+    {
+      name: 'Dashboard Plantilla con lista de usuarios',
+      tag: 'proyecto',
+      language: 'php',
+      price: 100,
+    },
+    {
+      name: 'Control de pagos de alumnos',
+      tag: 'proyecto',
+      language: 'c',
+      price: 2,
+    },
+    {
+      name: 'Toast',
+      tag: 'libreria',
+      language: 'angular',
+      price: 20,
+    },
+    {
+      name: 'Dulces',
+      tag: 'api',
+      language: 'php',
+      price: 10,
+    },
+    {
+      name: 'Control de pagos de alumnos',
+      tag: 'proyecto',
+      language: 'c',
+      price: 2,
+    },
+    {
+      name: 'Toast',
+      tag: 'libreria',
+      language: 'angular',
+      price: 20,
+    },
+    {
+      name: 'Dulces',
+      tag: 'api',
+      language: 'php',
+      price: 10,
+    },
+    {
+      name: 'Toast',
+      tag: 'libreria',
+      language: 'angular',
+      price: 20,
+    },
+  ]);
+
   return (
-    <div className="container p-5">
+    <div className="container mt-36">
       <div className="bg-white dark:bg-gray-800 ">
-        <div className="text-center w-full mx-auto py-12 px-4 sm:px-6 lg:px-8 z-20">
-          <h2 className="text-3xl font-extrabold text-black dark:text-white sm:text-4xl">
-            <span className="block">Want to be millionaire ?</span>
-            <span className="block text-indigo-500">
-              It&#x27;s today or never.
-            </span>
-          </h2>
+        <div className="text-center w-full mx-auto py-4 px-4 sm:px-6 lg:px-8">
+          <h1 className="xl:text-4xl text-3xl text-center text-gray-800 font-extrabold pb-6 sm:w-4/6 w-5/6 mx-auto">
+            <span className="block">Busca el proyecto que quieras</span>
+            <span className="block text-blue-500">así de facil</span>
+          </h1>
         </div>
 
         <div className="flex items-center justify-center">
@@ -63,7 +137,7 @@ function Projects() {
                 className="checked:bg-blue-500 outline-none focus:outline-none right-4 checked:right-0 duration-200 ease-in absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
               />
               <label
-                for="Blue"
+                htmlFor="Blue"
                 className="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
               ></label>
             </div>
@@ -72,41 +146,44 @@ function Projects() {
         </div>
 
         <div className="flex items-center justify-center gap-8 mb-4">
-          <label class="flex items-center space-x-3 mb-3">
+          <label className="flex items-center space-x-3 mb-3">
             <input
               type="checkbox"
               name="checked-demo"
-              class="form-tick appearance-none bg-white bg-check h-6 w-6 border border-gray-300 rounded-md checked:bg-blue-500 checked:border-transparent focus:outline-none"
+              className="form-tick appearance-none bg-white bg-check h-6 w-6 border border-gray-300 rounded-md checked:bg-blue-500 checked:border-transparent focus:outline-none"
             />
-            <span class="text-gray-700 dark:text-white font-normal">React</span>
+            <span className="text-gray-700 dark:text-white font-normal">
+              React
+            </span>
           </label>
-          <label class="flex items-center space-x-3 mb-3">
+          <label className="flex items-center space-x-3 mb-3">
             <input
               type="checkbox"
               name="checked-demo"
-              class="form-tick appearance-none bg-white bg-check h-6 w-6 border border-gray-300 rounded-md checked:bg-blue-500 checked:border-transparent focus:outline-none"
+              className="form-tick appearance-none bg-white bg-check h-6 w-6 border border-gray-300 rounded-md checked:bg-blue-500 checked:border-transparent focus:outline-none"
             />
-            <span class="text-gray-700 dark:text-white font-normal">
+            <span className="text-gray-700 dark:text-white font-normal">
               Angular
             </span>
           </label>
-          <label class="flex items-center space-x-3 mb-3">
+          <label className="flex items-center space-x-3 mb-3">
             <input
               type="checkbox"
               name="checked-demo"
-              class="form-tick appearance-none bg-white bg-check h-6 w-6 border border-gray-300 rounded-md checked:bg-blue-500 checked:border-transparent focus:outline-none"
+              className="form-tick appearance-none bg-white bg-check h-6 w-6 border border-gray-300 rounded-md checked:bg-blue-500 checked:border-transparent focus:outline-none"
             />
-            <span class="text-gray-700 dark:text-white font-normal">Java</span>
+            <span className="text-gray-700 dark:text-white font-normal">
+              Java
+            </span>
           </label>
         </div>
       </div>
 
-      {/* <div className="px-4"> */}
       <div className="text-center">
-        <Cards />
+        <Cards projects={projects} />
       </div>
     </div>
   );
 }
 
-export default Projects;
+export default Home;

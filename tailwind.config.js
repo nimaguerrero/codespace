@@ -1,5 +1,8 @@
 module.exports = {
-  content: ['./src/**/*.{html,js,jsx,ts,tsx}'],
+  content: [
+    './src/**/*.{html,js,jsx,ts,tsx}',
+    './node_modules/tw-elements/dist/js/**/*.js',
+  ],
   important: true,
   // Active dark mode on class basis
   darkMode: 'class',
@@ -23,7 +26,7 @@ module.exports = {
       zIndex: ['hover', 'active'],
     },
   },
-  plugins: [],
+  plugins: [require('tw-elements/dist/plugin')],
   future: {
     purgeLayersByDefault: true,
   },

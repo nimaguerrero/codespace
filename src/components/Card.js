@@ -1,21 +1,26 @@
 const Card = ({ project }) => {
   const { name, tag, price, language } = project;
 
-  const miscolores = {
-    react: '#3B86F2',
-    java: '#F49C2B',
-    // c: '#626BEC',
-    c: '#7D2ECA',
-    angular: '#ED4347',
-    php: '#51618A',
+  // const shadowcolor = {
+  //   react: 'shadow-blue-500/50',
+  //   java: 'shadow-yellow-500/50',
+  //   c: 'shadow-purple-500/50',
+  //   angular: 'shadow-red-500/50',
+  //   php: 'shadow-indigo-500/50',
+  // };
+  const bgcolor = {
+    react: 'bg-blue-300',
+    java: 'bg-yellow-300',
+    c: 'bg-purple-300',
+    angular: 'bg-red-300',
+    php: 'bg-indigo-300',
   };
-
   const fillcolor = {
-    react: '#6da3fb',
-    java: '#f3c06b',
-    c: '#a17cf3',
-    angular: '#d3d3d3',
-    php: '#8494BD',
+    react: 'fill-blue-300',
+    java: 'fill-yellow-300',
+    c: 'fill-purple-300',
+    angular: 'fill-red-300',
+    php: 'fill-indigo-300',
   };
 
   const icons = {
@@ -27,31 +32,28 @@ const Card = ({ project }) => {
   };
 
   return (
-    <div
-      className="text-left relative overflow-hidden rounded-lg shadow-lg cursor-pointer"
-      style={{ backgroundColor: miscolores[language] }}
-    >
+    <div className="text-left relative overflow-hidden rounded-lg drop-shadow-lg hover:scale-105 cursor-pointer bg-white">
       <svg
         className="absolute bottom-0 left-0 mb-8"
         viewBox="0 0 375 283"
         fill="none"
       >
         <rect
+          className={fillcolor[language]}
           x="159.52"
           y={175}
           width={152}
           height={152}
           rx={8}
           transform="rotate(-45 159.52 175)"
-          fill={fillcolor[language]}
         ></rect>
         <rect
+          className={fillcolor[language]}
           y="107.48"
           width={152}
           height={152}
           rx={8}
           transform="rotate(-45 0 107.48)"
-          fill={fillcolor[language]}
         ></rect>
       </svg>
 
@@ -73,13 +75,12 @@ const Card = ({ project }) => {
           />
         </picture>
       </div>
-      <div className="relative text-white px-6 pb-6 mt-6">
+      <div className="relative text-gray-800 px-6 pb-6 mt-6">
         <span className="block opacity-75 -mb-1">{tag}</span>
         <div className="flex justify-between">
           <span className="font-semibold text-xl truncate">{name}</span>
           <span
-            className="bg-white rounded-full text-xs font-bold px-3 py-2 leading-none flex items-center"
-            style={{ color: miscolores[language] }}
+            className={`${bgcolor[language]} rounded-full text-xs font-bold px-3 py-2 leading-none flex items-center text-gray-800`}
           >
             ${price}.00
           </span>
