@@ -1,14 +1,10 @@
 import { Toaster } from 'react-hot-toast';
 import ReactTooltip from 'react-tooltip';
-import Navbar from './Navbar';
-import Footer from './Footer';
 
-function Layout({ children }) {
+function AuthLayout({ children }) {
   return (
     <main className="dark:bg-gray-800 bg-white relative h-screen">
-      <Navbar />
       {children}
-      <Footer />
       <Toaster
         toastOptions={{
           position: 'top-center',
@@ -19,4 +15,4 @@ function Layout({ children }) {
     </main>
   );
 }
-export default Layout;
+export default AuthLayout;

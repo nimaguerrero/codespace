@@ -32,7 +32,7 @@ const Card = ({ project }) => {
   };
 
   return (
-    <div className="text-left relative overflow-hidden rounded-lg drop-shadow-lg hover:scale-105 cursor-pointer bg-white">
+    <div className="text-left relative overflow-hidden rounded-lg drop-shadow-lg hover:scale-105 cursor-pointer bg-white ease-in-out">
       <svg
         className="absolute bottom-0 left-0 mb-8"
         viewBox="0 0 375 283"
