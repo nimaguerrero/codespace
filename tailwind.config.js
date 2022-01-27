@@ -1,6 +1,6 @@
 module.exports = {
   content: [
-    './src/**/*.{html,js,jsx,ts,tsx}',
+    './src/app/**/*.{html,js,jsx,ts,tsx}',
     './node_modules/tw-elements/dist/js/**/*.js',
   ],
   important: true,
@@ -14,7 +14,7 @@ module.exports = {
     extend: {
       backgroundImage: (theme) => ({
         // check: "url('/icons/check.svg')",
-        landscape: "url('/images/landscape/2.jpg')",
+        // landscape: "url('/images/landscape/2.jpg')",
       }),
     },
   },
