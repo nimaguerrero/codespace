@@ -42,3 +42,11 @@ client/public
 
 # IDE
 .idea/
+
+# dotenv environment variables file
+client/.env
+server/.env
+client/.env.test
+server/.env.test
+client/.env.production
+server/.env.production
