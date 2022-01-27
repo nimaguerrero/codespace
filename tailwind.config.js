@@ -1,6 +1,6 @@
 module.exports = {
   content: [
-    './client/app/**/*.{html,js,jsx,ts,tsx}',
+    './src/**/*.{html,js,jsx,ts,tsx}',
     './node_modules/tw-elements/dist/js/**/*.js',
   ],
   important: true,
@@ -13,8 +13,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: (theme) => ({
-        check: "url('https://www.svgrepo.com/show/96431/check-mark-in-a-circle.svg')",
-        // landscape: "url('/images/landscape/2.jpg')",
+        // check: "url('/icons/check.svg')",
+        landscape: "url('/images/landscape/2.jpg')",
       }),
     },
   },
