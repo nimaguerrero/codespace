@@ -2,7 +2,7 @@
   "name": "codespace",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "template.js",
   "dependencies": {
     "@testing-library/jest-dom": "5.16.1",
     "@testing-library/react": "12.1.2",
@@ -10,8 +10,6 @@
     "alpinejs": "3.8.1",
     "bcryptjs": "2.4.3",
     "cors": "2.8.5",
-    "cross-env": "7.0.3",
-    "dotenv": "14.3.2",
     "ejs": "3.1.6",
     "express": "4.17.1",
     "express-handlebars": "5.3.4",
@@ -28,6 +26,7 @@
     "nodemailer-smtp-transport": "2.7.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-hot-loader": "4.13.0",
     "react-hot-toast": "2.2.0",
     "react-router-dom": "6.2.1",
     "react-scripts": "5.0.0",
@@ -36,27 +35,59 @@
     "uuid": "8.3.2"
   },
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "webpack": "webpack --mode development --watch",
+    "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
+    "start": "NODE_ENV=production node ./dist/server.generated.js",
+    "dev": "nodemon",
     "test:react": "react-scripts test",
-    "build:css": "postcss src/app/styles/tailwind.css -o src/app/styles/main.css",
-    "watch:css": "postcss src/app/styles/tailwind.css -o src/app/styles/main.css"
+    "build:css": "postcss client/app/styles/tailwind.css -o client/app/styles/main.css",
+    "watch:css": "postcss client/app/styles/tailwind.css -o client/app/styles/main.css"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   },
   "devDependencies": {
+    "@hot-loader/react-dom": "17.0.2",
     "autoprefixer": "10.4.2",
     "babel-core": "6.26.3",
     "babel-loader": "8.2.3",
     "babel-preset-env": "1.7.0",
     "babel-preset-react": "6.24.1",
+    "babel-preset-stage-2": "6.24.1",
+    "eslint": "8.7.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-jsx-a11y": "6.5.1",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-react": "7.28.0",
+    "eslint-plugin-react-hooks": "4.3.0",
+    "husky": "7.0.4",
     "nodemon": "2.0.15",
     "postcss": "8.4.5",
     "postcss-cli": "9.1.0",
-    "tailwindcss": "3.0.15",
+    "prettier": "2.5.1",
+    "pretty-quick": "3.1.3",
+    "tailwindcss": "3.0.17",
     "webpack": "5.67.0",
-    "webpack-cli": "4.9.2"
+    "webpack-cli": "4.9.2",
+    "webpack-dev-middleware": "5.3.0",
+    "webpack-hot-middleware": "2.25.1",
+    "webpack-node-externals": "3.0.0"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "Mongo",
+    "Express",
+    "React",
+    "Node",
+    "Boilerplate",
+    "Setup"
+  ],
+  "author": {
+    "name": "Roberto Luna Victoria Monzón",
+    "email": "roberto971968@hotmail.com",
+    "url": "https://github.com/ethanJones21/codespace"
+  },
   "license": "ISC"
 }
