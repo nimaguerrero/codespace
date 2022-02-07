@@ -1,5 +1,8 @@
 import AuthLayout from 'layout/Auth';
 import { Link, useNavigate } from 'react-router-dom';
+import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { validateEmail, validatePassword } from './Validators';
+import { useState } from 'react';
 
 function Login() {
   const navigate = useNavigate();
@@ -29,30 +32,40 @@ function Login() {
                 <ion-icon name="return-up-back-outline"></ion-icon> Regresar
               </div>
             </header>
-            <form className="mt-6" action="#" method="POST">
+            <Formik
+              initialValues={{ email: '', password: '' }}
+              validate={({email,password}) => {
+                const errors = {};
+                validateEmail(email,errors);
+                validatePassword(password,errors);
+                return errors;
+              }}
+              onSubmit={(values) => {
+                console.log(values);
+              }}
+            >
+            {({errors, isSubmitting})=>(
+              <Form className="mt-6">
               <div>
                 <label className="block text-gray-700">Correo</label>
-                <input
+                <Field
                   type="email"
-                  name="Email"
+                  name="email"
                   placeholder="Correo"
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
-                  autofocus
-                  autoComplete
-                  required
                 />
+                <ErrorMessage name="email" component={()=>(<p className="text-red-600">{errors.email}</p>)} />
               </div>
               <div className="mt-4">
                 <label className="block text-gray-700">Contraseña</label>
-                <input
+                <Field
                   type="password"
-                  name="Password"
+                  name="password"
                   placeholder="Contraseña"
-                  minLength={6}
                   className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
                   focus:bg-white focus:outline-none"
-                  required
                 />
+                <ErrorMessage name="password" component={()=>(<p className="text-red-600">{errors.password}</p>)} />
               </div>
               <div className="text-right mt-2">
                 <Link
@@ -64,12 +77,17 @@ function Login() {
               </div>
               <button
                 type="submit"
+                disabled={errors}
                 className="w-full block bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg
                 px-4 py-3 mt-6"
               >
                 Ingresar
               </button>
-            </form>
+            </Form>
+            )}
+            </Formik>
+
+
             <hr className="my-6 border-gray-300 w-full" />
             <button
               type="button"

@@ -1,5 +1,8 @@
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import AuthLayout from 'layout/Auth';
 import { Link, useNavigate } from 'react-router-dom';
+import RegisterServ from 'services/Register';
+import { equalPasswords, validateEmail, validateName, validatePassword } from './Validators';
 
 function Register() {
   const navigate = useNavigate();
@@ -14,7 +17,7 @@ function Register() {
           />
         </div>
         <div
-          className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:mx-0 md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
+          className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
           flex items-center justify-center"
         >
           <div className="w-full h-100">
@@ -29,64 +32,84 @@ function Register() {
                 <ion-icon name="return-up-back-outline"></ion-icon> Regresar
               </div>
             </header>
-            <form className="mt-6" action="#" method="POST">
-              <div>
-                <label className="block text-gray-700">Nombre completo</label>
-                <input
-                  type="text"
-                  name="Name"
-                  placeholder="Nombre completo"
-                  className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
-                  autofocus
-                  autoComplete
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700">Correo</label>
-                <input
-                  type="email"
-                  name="Email"
-                  placeholder="Correo"
-                  className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
-                  autofocus
-                  autoComplete
-                  required
-                />
-              </div>
-              <div className="mt-4">
-                <label className="block text-gray-700">Contraseña</label>
-                <input
-                  type="password"
-                  name="Password"
-                  placeholder="Contraseña"
-                  minLength={6}
-                  className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
-                  focus:bg-white focus:outline-none"
-                  required
-                />
-              </div>
-              <div className="mt-4">
-                <label className="block text-gray-700">Repita contraseña</label>
-                <input
-                  type="password"
-                  name="Password-Repeat"
-                  placeholder="Repita contraseña"
-                  minLength={6}
-                  className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
-                  focus:bg-white focus:outline-none"
-                  required
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full block bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg
-                px-4 py-3 mt-6"
+            <Formik
+            initialValues={{ name: '', email: '', password: '', passwordRepeat: '' }}
+            validate={({name, email,password, passwordRepeat}) => {
+              const errors = {}
+              validateName(name,errors)
+              validateEmail(email,errors)
+              validatePassword(password,errors)
+              equalPasswords(password,passwordRepeat,errors)
+              return errors
+            }}
+            onSubmit={async({name, email, password}) => {
+              const data = {
+                name, email, password
+              }
+              await RegisterServ(data)
+              .then(res=>{
+                console.log(res)
+                // navigate(-1)
+              })
+            }}
+            >
+            {({errors, isSubmitting})=>(
+              <Form className="mt-6"
               >
-                Registrarse
-              </button>
-            </form>
+                <div>
+                  <label className="block text-gray-700">Nombre completo</label>
+                  <Field
+                    type="text"
+                    name="name"
+                    placeholder="Nombre completo"
+                    className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
+                  />
+                  <ErrorMessage name="name" component={()=>(<p className="text-red-600">{errors.name}</p>)} />
+                </div>
+                <div>
+                  <label className="block text-gray-700">Correo</label>
+                  <Field
+                    type="email"
+                    name="email"
+                    placeholder="Correo"
+                    className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
+                  />
+                  <ErrorMessage name="email" component={()=>(<p className="text-red-600">{errors.email}</p>)} />
+                </div>
+                <div className="mt-4">
+                  <label className="block text-gray-700">Contraseña</label>
+                  <Field
+                    type="password"
+                    name="password"
+                    placeholder="Contraseña"
+                    className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+                    focus:bg-white focus:outline-none"
+                  />
+                  <ErrorMessage name="password" component={()=>(<p className="text-red-600">{errors.password}</p>)} />
+                </div>
+                <div className="mt-4">
+                  <label className="block text-gray-700">Repita contraseña</label>
+                  <Field
+                    type="password"
+                    name="passwordRepeat"
+                    placeholder="Repita contraseña"
+                    className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+                    focus:bg-white focus:outline-none"
+                  />
+                  <ErrorMessage name="passwordRepeat" component={()=>(<p className="text-red-600">{errors.passwordRepeat}</p>)} />
+                </div>
+  
+                <button
+                  type="submit"
+                  // disabled={errors}
+                  className="w-full block bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 text-white font-semibold rounded-lg
+                  px-4 py-3 mt-6"
+                >
+                  Registrarse
+                </button>
+              </Form>
+            )}
+            </Formik>
             <hr className="my-6 border-gray-300 w-full" />
             <button
               type="button"

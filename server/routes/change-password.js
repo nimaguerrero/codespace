@@ -1,14 +1,14 @@
-const { Router } = require("express");
-const router = Router();
+const { Router } = require('express')
+const router = Router()
 
 const {
-    sendEmail,
-    updatePassword,
-    getTimeCode,
-} = require("../controllers/change-password.controller");
+  sendEmail,
+  updatePassword,
+  getTimeCode
+} = require('../controllers/change-password')
 
-router.post("/email", sendEmail);
-router.get("/:code", getTimeCode);
-router.post("/update-password", updatePassword);
+router.post('/email', sendEmail)
+router.get('/:code', getTimeCode)
+router.post('/update-password', updatePassword)
 
-module.exports = router;
+module.exports = router

@@ -1,25 +1,27 @@
-const { Router } = require("express");
-const router = Router();
-const fs = require("fs");
+const { Router } = require('express')
+const router = Router()
+const fs = require('fs')
 
-const pathRouter = `${__dirname}`;
+const pathRouter = `${__dirname}`
 
 const removeExtension = (fileName) => {
-    return fileName.split(".").shift();
-};
+  return fileName.split('.').shift()
+}
 
 fs.readdirSync(pathRouter).filter((file) => {
-    const fileWithOutExt = removeExtension(file);
-    const skip = ["index"].includes(fileWithOutExt);
-    if (!skip) {
-        router.use(`/${fileWithOutExt}`, require(`./${fileWithOutExt}`));
-        console.log("CARGAR RUTA ---->", fileWithOutExt);
-    }
-});
+  const fileWithOutExt = removeExtension(file)
+  const skip = ['index'].includes(fileWithOutExt)
+  if (!skip) {
+    router.use(`/${fileWithOutExt}`, require(`./${fileWithOutExt}`))
+    console.log('CARGAR RUTA ---->', fileWithOutExt)
+    return true
+  }
+  return false
+})
 
-router.get("*", (req, res) => {
-    res.status(404);
-    res.send({ error: "Not found" });
-});
+router.get('*', (req, res) => {
+  res.status(404)
+  res.send({ error: 'Not found' })
+})
 
-module.exports = router;
+module.exports = router
