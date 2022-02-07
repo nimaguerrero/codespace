@@ -10,8 +10,8 @@ const ClientSchema = new Schema(
       type: Object,
       required: true,
       default: {
-        url: 'https://res.cloudinary.com/gigga/image/upload/v1643325420/codespace/no-user_c2w7q2_xz3ftl_vn6lrk.png',
-        public_id: 'mrstems/no-user_c2w7q2_xz3ftl_vn6lrk'
+        uri: '',
+        type: ''
       }
     },
     gender: { type: String, required: false },

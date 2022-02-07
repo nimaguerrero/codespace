@@ -9,7 +9,6 @@ if (process.env.NODE_ENV !== 'production') {
  * @requires morgan
  * @requires multer
  * @requires path
- * @requires cloudinary
  * @requires ./config/database
  */
 const express = require('express')
@@ -18,20 +17,11 @@ const cors = require('cors')
 const morgan = require('morgan')
 const multer = require('multer')
 const path = require('path')
-const cloudinary = require('cloudinary')
 
 const { dbConnection } = require('./config/database')
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
-})
-
-// settings
 app.set('port', process.env.PORT || 3000)
 
-// Multer para imagenes
 const storage = multer.diskStorage({
   destination: path.join(__dirname, 'public/uploads'),
   filename: (req, file, cb) => {
@@ -39,23 +29,15 @@ const storage = multer.diskStorage({
   }
 })
 
-app.use(multer({ storage }).single('file')) // en el formdata hay que ponerle file
-// Morgan para mensajes cortos en el backend
+app.use(multer({ storage }).single('file'))
 app.use(morgan('tiny'))
-/// / Lectura y parseo del body
 app.use(express.json())
-/// /  Leer de formularios
 app.use(express.urlencoded({ extended: true }))
-
-// Directorio publico
 app.use(express.static('public'))
+app.use(cors())
 
 dbConnection()
 
-// CORS
-app.use(cors())
-
-// ROUTES
 app.use('/api/v1.0', require('./routes'))
 
 app.get('*', (req, res) => {

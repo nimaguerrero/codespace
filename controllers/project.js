@@ -11,7 +11,6 @@
 const { response, request } = require('express')
 /** Models */
 const Project = require('../models/project')
-const Tag = require('../models/tag')
 /** Helpers */
 const {
   conditionPrevious,
@@ -54,22 +53,14 @@ const getProjectsByPage = async (req = request, res = response) => {
 
   try {
     const longitud = await Project.find({
-      $or: [
-        { name: regex },
-        { tags_names: { $in: [regex] } },
-        { artists: { $in: [regex] } }
-      ]
+      $or: [{ name: regex }, { tag: regex }]
     }).countDocuments()
     songs.longitud = longitud
 
     let s
     if (func === 'orden' && param === 'Año de lanzamiento') {
       s = await Project.find({
-        $or: [
-          { name: regex },
-          { tags_names: { $in: [regex] } },
-          { artists: { $in: [regex] } }
-        ]
+        $or: [{ name: regex }, { tag: regex }]
       })
         .limit(limit)
         .skip(startIndex)
@@ -105,17 +96,16 @@ const getProjectsByPage = async (req = request, res = response) => {
 
 const getProject = async (req = request, res = response) => {
   const id = req.params.id
-  const projectObj = {
-    project: {},
-    tags: []
-  }
   try {
-    projectObj.project = await Project.findById(id)
-    const projectId = projectObj.project._id
-    projectObj.tags = await Tag.find({ project: projectId })
+    const project = await Project.findById(id)
+
+    if (!project) {
+      return res.status(404).json({ ok: false, project: null })
+    }
+
     res.json({
       ok: true,
-      project: projectObj
+      project
     })
   } catch (err) {
     handleError(res, err)
