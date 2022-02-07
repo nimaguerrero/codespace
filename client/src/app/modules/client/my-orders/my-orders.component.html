@@ -1,0 +1,108 @@
+<Navbar></Navbar>
+<main>
+  <div class="profile">
+    <header>
+      <div class="img">
+        <img [src]="profileUrl" alt="Perfil" />
+      </div>
+      <h3>
+        {{ uS.user.name ?? "cargando.." }}
+        {{ uS.user.lastname ?? "cargando.." }}
+      </h3>
+    </header>
+    <div class="profile__content">
+      <ng-container *ngIf="orders$ | async; let orders">
+        <main *ngIf="orders.length > 0">
+          <section class="orders animated fadein">
+            <ng-container *ngFor="let order of orders; let i = index">
+              <div class="order">
+                <p>
+                  <strong>Transacción</strong>
+                  <br />
+                  <br />
+                  {{ order.transaction }}
+                </p>
+                <p>
+                  <strong>Estado</strong>
+                  <br />
+                  <br />
+                  {{ order.state }}
+                </p>
+                <p>
+                  <strong>Fecha</strong>
+                  <br />
+                  <br />
+                  {{ order.createdAt | date }}
+                </p>
+                <button
+                  class="btn btn--primary"
+                  (click)="viewTicket(order.transaction)"
+                >
+                  Ver ticket
+                </button>
+                <button
+                  class="btn btn--secondary"
+                  (click)="report(order.details[0].tag._id, order.transaction)"
+                >
+                  Reportar
+                </button>
+              </div>
+            </ng-container>
+          </section>
+          <div class="pagination">
+            <button
+              [disabled]="!pagination.previous"
+              [class.disabled]="!pagination.previous"
+              [class.btn--primary]="pagination.previous"
+              (click)="getOrders(pagination.previous)"
+              type="button"
+              class="btn"
+            >
+              Prev
+            </button>
+            <span>{{ page }}</span>
+            <button
+              [disabled]="!pagination.next"
+              [class.disabled]="!pagination.next"
+              [class.btn--primary]="pagination.next"
+              (click)="getOrders(pagination.next)"
+              type="button"
+              class="btn btn--primary"
+            >
+              Next
+            </button>
+          </div>
+        </main>
+        <main *ngIf="orders.length == 0">
+          <h4>No registra ninguna compra</h4>
+        </main>
+      </ng-container>
+      <aside>
+        <h5>Compras - ({{ pagination.longitud }})</h5>
+        <p *ngIf="timeUltimateOrder">
+          Ultima compra: {{ timeUltimateOrder | date: "short" }}
+        </p>
+        <p *ngIf="!timeUltimateOrder">Ultima compra: No registra</p>
+        <div class="to-orders">
+          <a [routerLink]="['/profile']" class="btn btn--primary">Ver perfil</a>
+        </div>
+        <div class="to-home">
+          <a class="arrow-back text-primary fw-500" [routerLink]="['/']">
+            &larr; Volver a inicio
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <ng-container *ngIf="openReport">
+    <Modal-report-client
+      [tag]="tag"
+      [transaction]="transaction"
+      (close)="closeReportModal($event)"
+    ></Modal-report-client>
+  </ng-container>
+</main>
+<Footer></Footer>
+
+<Loading *ngIf="loading"></Loading>

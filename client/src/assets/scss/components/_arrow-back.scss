@@ -1,0 +1,7 @@
+@use "../abstracts/colors";
+
+.arrow-back {
+    color: colors.$text-color;
+    cursor: pointer;
+    font-size: 0.9rem;
+}

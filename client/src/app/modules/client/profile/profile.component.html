@@ -1,0 +1,105 @@
+<Navbar></Navbar>
+<main>
+  <div class="profile">
+    <header>
+      <div class="img">
+        <img [src]="profileUrl" alt="Perfil" />
+      </div>
+      <h3>{{ client.name }} {{ client.lastname }}</h3>
+    </header>
+    <div class="profile__content">
+      <main>
+        <h4>Información personal</h4>
+        <ul class="profile__posts">
+          <form
+            [formGroup]="profileForm"
+            (ngSubmit)="submitForm(profileForm)"
+            class="login__form"
+            novalidate
+          >
+            <input
+              formControlName="nameProfileForm"
+              name="nameProfileForm"
+              type="text"
+              class="form-control"
+              id="profile-name"
+              placeholder="Nombre"
+            />
+            <input
+              formControlName="lastnameProfileForm"
+              name="lastnameProfileForm"
+              type="text"
+              class="form-control"
+              id="profile-lastname"
+              placeholder="Apellido"
+            />
+            <input
+              formControlName="emailProfileForm"
+              name="emailProfileForm"
+              type="email"
+              class="form-control"
+              id="profile-email"
+              placeholder="Correo"
+            />
+            <input
+              formControlName="countryProfileForm"
+              name="countryprofileForm"
+              type="text"
+              class="form-control appended-form-control"
+              id="profile-country"
+              placeholder="Ciudad"
+            />
+
+            <div class="form-group form__group--uploader mb-1">
+              <div #dropProfile class="uploader">
+                <input
+                  id="file-logo-white"
+                  type="file"
+                  (change)="onFileChange($event)"
+                  name="fileUpload"
+                  accept="image/*"
+                />
+
+                <label for="file-logo-white" id="file-drag">
+                  <img id="file-image" src="#" alt="Preview" class="hidden" />
+                  <div id="start">
+                    <div>Seleccione imagen o arrastrelo aqui</div>
+                    <div id="notimage" class="hidden">Seleccione imagen</div>
+                    <span id="file-upload-btn" class="btn btn-primary"
+                      >Seleccione imagen</span
+                    >
+                  </div>
+                  <div id="response" class="hidden">
+                    <div id="messages"></div>
+                    <progress class="progress" id="file-progress" value="0">
+                      <span>0</span>%
+                    </progress>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <button class="btn btn--primary" id="update-profile" type="submit">
+              Actualizar
+            </button>
+          </form>
+        </ul>
+      </main>
+      <aside>
+        <h5>Información</h5>
+        <p>Ultimo cambio: {{ client.updatedAt | date: "short" }}</p>
+        <div class="to-orders">
+          <a [routerLink]="['/profile/my-orders']" class="btn btn--primary"
+            >Ir a mis ordenes</a
+          >
+        </div>
+        <div class="to-home">
+          <a class="arrow-back text-primary fw-500" [routerLink]="['/']">
+            &larr; Volver a inicio
+          </a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+<Footer></Footer>

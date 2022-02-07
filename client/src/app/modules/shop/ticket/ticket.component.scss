@@ -1,0 +1,85 @@
+@use "~src/assets/scss/abstracts/breakpoints" as bp;
+@use "~src/assets/scss/abstracts/colors" as c;
+@use "~src/assets/scss/utilities/color-utilities" as cu;
+
+.ticket {
+  margin: 2rem auto;
+  background-color: c.$body-color;
+  box-shadow: cu.$box-shadow;
+  padding: 3rem;
+  width: 70%;
+  min-height: 10rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  text-align: center;
+  @media screen and (min-width: map-get(bp.$bp-width,xl)) {
+    width: 25%;
+  }
+  header {
+    width: 100%;
+    .nsale {
+      text-align: center;
+      h4 {
+        margin: 0 0 1rem 0;
+        span {
+          font-size: 1rem;
+        }
+      }
+    }
+    .timestamp {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .time {
+        text-align: end;
+      }
+      .date {
+        text-align: start;
+      }
+    }
+  }
+  table {
+    width: 100%;
+    tr {
+      height: 2rem;
+      th,
+      td {
+        text-align: start;
+      }
+      .price,
+      .igv,
+      .total {
+        text-align: end;
+      }
+    }
+  }
+  footer {
+    width: 100%;
+    text-align: start;
+    .thanks {
+      text-align: center;
+    }
+  }
+}
+.logo,
+.perfil {
+  width: 5rem;
+  height: 5rem;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.extra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 30%;
+  margin: 1rem auto 0.2rem auto;
+  text-align: end;
+}

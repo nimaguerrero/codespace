@@ -1,0 +1,82 @@
+<ng-container *ngIf="ticket$ | async; let ticket; else: loading">
+  <div class="extra">
+    <a class="arrow-back fw-300" [routerLink]="['/profile/my-orders']">
+      &larr; Ir a mis ordenes
+    </a>
+    <a class="arrow-back fw-300" [routerLink]="['/']"> &larr; Ir a inicio </a>
+  </div>
+  <div class="ticket">
+    <figure class="logo">
+      <img [src]="logo" alt="" />
+    </figure>
+
+    <header>
+      <div class="nsale">
+        <h4>
+          BOLETA DE VENTA ELECTRONICA
+          <br />
+          B{{ ticket.sale.nsale }}
+          <br />
+          <br />
+          <span>#{{ ticket.sale.transaction }}</span>
+        </h4>
+      </div>
+      <div class="timestamp">
+        <div class="date">
+          Fecha
+          <br />
+          {{ ticket.sale.createdAt | date: "shortDate" }}
+        </div>
+        <div class="time">
+          Hora
+          <br />
+          {{ ticket.sale.createdAt | date: "shortTime" }}
+        </div>
+      </div>
+    </header>
+    <table>
+      <tr>
+        <th>CANTIDAD</th>
+        <th>DESCRIPCION</th>
+        <th class="price">IMPORTE</th>
+      </tr>
+      <tr>
+        <td>{{ ticket.details[0].amount }}</td>
+        <td>
+          {{ ticket.details[0].name_artist_song }} ({{
+            ticket.details[0].tag.name
+          }})
+        </td>
+        <td class="price">{{ ticket.details[0].subtotal }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="igv">IGV</td>
+        <td class="igv">{{ ticket.sale.igv }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="total">TOTAL</td>
+        <td class="total">{{ ticket.sale.total }}</td>
+      </tr>
+    </table>
+    <footer>
+      <p>
+        CLIENTE: {{ ticket.sale.client.name }} {{ ticket.sale.client.lastname }}
+      </p>
+      <p class="thanks">
+        Forma de pago:
+        <br />
+        GRACIAS POR SU COMPRA CONSERVE ESTE COMPROBANTE EN CASO DE RECLAMO O
+        DEVOLUCIÓN
+        <br />
+        SUS TICKETS DE COMPRA TAMBIÉN SE ENVIAN A SU CORREO
+        {{ ticket.sale.client.email }}
+      </p>
+    </footer>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <Loading></Loading>
+</ng-template>

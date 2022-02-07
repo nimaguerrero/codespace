@@ -1,0 +1,192 @@
+<Navbar></Navbar>
+
+<main class="song animated fadein">
+  <div class="song__contain">
+    <section class="song__section" *ngIf="!loading">
+      <div class="song__header">
+        <h3>{{ song.name }}</h3>
+        <a class="arrow-back fw-300" href="javascript:window.history.back()">
+          &larr; Ir atrás
+        </a>
+      </div>
+      <span class="song__fecha t6 fw-300">
+        {{ song.createdAt | date: "fullDate" | capitalize }}
+        {{ song.createdAt | date: "shortTime" }}
+      </span>
+      <div class="song__info">
+        <div
+          *ngIf="!song.link_youtube || song.link_youtube.length == 0"
+          class="song__img"
+        >
+          <img [src]="song.cover.url" [alt]="song.cover.public_id" />
+        </div>
+        <div
+          *ngIf="song.link_youtube && song.link_youtube.length > 0"
+          class="song__video"
+        >
+          <iframe
+            [src]="song.link_youtube | sanitize"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+        <div class="song__content">
+          <div class="song__tags">
+            <ng-container *ngFor="let tag of song.tags_names">
+              <span class="btn btn--outline-primary btn--tag fw-400"
+                >#{{ tag }}</span
+              >
+            </ng-container>
+          </div>
+          <div class="song__autor fw-300">
+            <strong>Autor:</strong> {{ song.author }}
+          </div>
+          <div class="song__artist fw-300">
+            <strong>Artistas:</strong> {{ song.artists | artistas }}
+          </div>
+
+          <div class="song__artist fw-300">
+            <strong>Album: </strong> {{ song.album }}
+          </div>
+          <div class="song__genero fw-300">
+            <strong>Genero: </strong>
+            {{ song.genres | generos }}
+          </div>
+          <div class="song__anio fw-300">
+            <strong>Año de lanzamiento:</strong>
+            {{ song.release_year }}
+          </div>
+          <div class="song__desc fw-300">
+            <strong>Descripcion:</strong>
+            {{ song.description }}
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="song__section">
+      <div class="song__header">
+        <h3>Descarga aquí</h3>
+        <button (click)="openReport = !openReport" class="btn btn--report">
+          Reportar enlace
+        </button>
+      </div>
+      <table class="rwd-table">
+        <tr>
+          <th>Contenido</th>
+          <th>Enlace con anuncios</th>
+          <th>Enlace directo</th>
+          <th>Servidores</th>
+        </tr>
+        <ng-container *ngFor="let tag of tags; index as i">
+          <tr>
+            <td data-th="Contenido">{{ tag.name }}</td>
+            <td data-th="Enlace con anuncios">
+              <a class="link-anuncios" [attr.href]="tag.link" target="_blank"
+                >Descargar</a
+              >
+            </td>
+            <td data-th="Enlace directo">
+              <button
+                (click)="openModalPaypal(song, tag)"
+                class="btn btn--warning"
+              >
+                Descargar ${{ tag.price | currency }}
+              </button>
+            </td>
+            <td data-th="Servidores">
+              <img
+                width="40"
+                height="40"
+                src="assets/img/drive-icon.png"
+                alt=""
+              />
+              <img
+                width="19"
+                height="18"
+                src="assets/img/mega-icon.png"
+                alt=""
+              />
+              <img
+                width="40"
+                height="35"
+                src="assets/img/wetransfer-icon.png"
+                alt=""
+              />
+            </td>
+          </tr>
+        </ng-container>
+
+        <!-- <tr class="empty-table" *ngIf="songs.length == 0">
+                            <td colspan="4">No hay resultados</td>
+                        </tr> -->
+      </table>
+    </section>
+
+    <section class="song__section">
+      <h3>Te puede interesar...</h3>
+      <div class="carousel">
+        <Carousel [term]="carouselTerm"></Carousel>
+      </div>
+    </section>
+
+    <section class="song__section">
+      <h3>Preguntas frecuentes</h3>
+      <div class="question">
+        <h4 class="fw-400">¿Cómo descargar?</h4>
+        <p class="fw-300">
+          1. Desactiva tu Bloqueador de Anuncios.
+          <br />
+          2. No es necesario desactivar tu Antivirus, nuestros links con
+          publicidad están libres de virus.
+          <br />
+          3. Si no quieres esperar a descargar, hay una opción de pago que
+          automáticamente te dará el link de descarga en servidores como
+          Mega,Google Drive o WeTrafender.
+          <br />
+          4. Cualquier duda o soporte que necesites porfa escribeme ¡aqui!
+        </p>
+      </div>
+      <div class="question">
+        <h4 class="fw-400">¿Por qué los anuncios?</h4>
+        <p class="fw-300">
+          1. Nos permite dar soporte al sitio web
+          <br />
+          2. Pagar los gastos de servidores,dominio y programadores
+          <br />
+          3. Comprar más contenido para poder compartirlo con ustedes.
+        </p>
+      </div>
+    </section>
+  </div>
+  <div class="banner">
+    <a href="https://join-adf.ly/6804792"
+      ><img
+        border="0"
+        src="https://cdn.adf.ly/images/banners/adfly.160x600.4.gif"
+        title="AdF.ly - acorta links y gana dinero!"
+    /></a>
+  </div>
+  <div class="banner-phone">
+    <a href="https://join-adf.ly/6804792"
+      ><img
+        border="0"
+        src="https://cdn.adf.ly/images/banners/adfly.300x250.1.gif"
+        width="300"
+        height="250"
+        title="AdF.ly - acorta links y gana dinero!"
+    /></a>
+  </div>
+</main>
+
+<Footer></Footer>
+
+<ng-container *ngIf="openMP">
+  <Modal-card-pay (close)="closePaypalModal($event)"></Modal-card-pay>
+</ng-container>
+
+<ng-container *ngIf="openReport">
+  <Modal-report (close)="closeReportModal($event)" [tags]="tags"></Modal-report>
+</ng-container>

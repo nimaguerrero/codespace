@@ -1,0 +1,127 @@
+@use "~src/assets/scss/abstracts/colors" as c;
+@use "~src/assets/scss/abstracts/breakpoints" as bp;
+
+.footer {
+  background-color: c.$dark-color;
+  .wave-svg {
+    display: block;
+  }
+  .wave-path {
+    fill: c.$white-color;
+  }
+  &__content {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    grid-template-rows: 1;
+    grid-auto-flow: dense;
+    gap: 0.5rem;
+
+    @media screen and (min-width: map-get(bp.$bp-width, xl)) {
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    }
+  }
+  &__column {
+    color: c.$white-color;
+    text-align: center;
+    @media screen and (min-width: map-get(bp.$bp-width, xl)) {
+      text-align: start;
+    }
+  }
+  &__logo {
+    width: 50%;
+  }
+  .menu {
+    img {
+      width: 5rem;
+      margin-left: 0;
+      margin-top: 0;
+      @media screen and (min-width: map-get(bp.$bp-width, xl)) {
+        width: 30%;
+        margin-top: 2.1rem;
+        margin-left: 7rem;
+      }
+    }
+    &__list {
+      padding: 0;
+      @media screen and (min-width: map-get(bp.$bp-width, xl)) {
+        padding-left: 1rem;
+      }
+    }
+    &__item {
+      margin-bottom: 0.5rem;
+    }
+    &__link {
+      color: c.$body-color;
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+  }
+  .social {
+    width: 100%;
+    height: 3.375rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    &__links {
+      background-color: c.$primary-color;
+      --webkit-mask-image: url("../../../../assets/img/amoeba.svg");
+      mask-image: url("../../../../assets/img/amoeba.svg");
+      width: 14.75rem;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+    &__link {
+      width: 1.2rem;
+      height: 1.2rem;
+      .icon-svg {
+        display: block;
+      }
+      .icon-path {
+        fill: c.$white-color;
+      }
+      &:not(:nth-child(2)) {
+        margin-top: 1.4rem;
+      }
+    }
+    .github {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+    .youtube {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+    .twitter {
+      margin-left: -0.2rem;
+    }
+  }
+  .copyright {
+    background-color: c.$dark-color;
+    color: c.$white-color;
+    padding: 1rem 2rem;
+    text-align: center;
+    &__wrapper {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &__text {
+      color: c.$white-color;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 18px;
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+
+    &__link {
+      color: c.$white-color;
+      text-decoration: none;
+    }
+  }
+}

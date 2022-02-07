@@ -1,0 +1,141 @@
+<main class="register">
+  <div class="register__contain">
+    <div class="register__content">
+      <header class="t2 text-primary">
+        Registro
+        <a class="arrow-back fw-300" [routerLink]="['/']">
+          &larr; Ir al inicio
+        </a>
+      </header>
+      <form
+        [formGroup]="registerForm"
+        (ngSubmit)="submitForm(registerForm)"
+        novalidate
+      >
+        <div class="form-group">
+          <label
+            *ngIf="fc.valid('nameRegisterForm')"
+            for="nameRegisterForm"
+            class="text-danger"
+            >{{ fc.error("nameRegisterForm", "nombre") }}</label
+          >
+          <input
+            formControlName="nameRegisterForm"
+            name="nameRegisterForm"
+            type="text"
+            class="form-control"
+            id="signup-name"
+            placeholder="Nombre"
+          />
+        </div>
+        <div class="form-group">
+          <label
+            *ngIf="fc.valid('lastnameRegisterForm')"
+            for="lastnameRegisterForm"
+            class="text-danger"
+            >{{ fc.error("lastnameRegisterForm", "apellido") }}</label
+          >
+          <input
+            formControlName="lastnameRegisterForm"
+            name="lastnameRegisterForm"
+            type="text"
+            class="form-control"
+            id="signup-lastname"
+            placeholder="Apellidos"
+          />
+        </div>
+        <div class="form-group">
+          <label
+            *ngIf="fc.valid('emailRegisterForm')"
+            for="emailRegisterForm"
+            class="text-danger"
+            >{{ fc.error("emailRegisterForm", "correo") }}</label
+          >
+          <input
+            formControlName="emailRegisterForm"
+            name="emailRegisterForm"
+            type="email"
+            class="form-control"
+            id="signup-email"
+            placeholder="Correo"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            *ngIf="fc.valid('passRegisterForm')"
+            for="passRegisterForm"
+            class="text-danger"
+            >{{ fc.error("passRegisterForm", "contraseña") }}</label
+          >
+          <input
+            #showPassRegister
+            formControlName="passRegisterForm"
+            name="passRegisterForm"
+            type="password"
+            class="form-control appended-form-control"
+            id="signup-password"
+            placeholder="Tu contraseña"
+          />
+          <div class="show-password">
+            <label for="checkPassRegister">
+              <i *ngIf="!isText" class="far fa-eye"></i>
+              <i *ngIf="isText" class="far fa-eye-slash"></i>
+              <input
+                id="checkPassRegister"
+                type="checkbox"
+                (click)="showPassword()"
+              />
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label
+            *ngIf="fc.valid('repassRegisterForm')"
+            for="repassRegisterForm"
+            class="text-danger"
+            >{{ fc.error("repassRegisterForm", "contraseña") }}</label
+          >
+          <input
+            #showrePassRegister
+            formControlName="repassRegisterForm"
+            name="repassRegisterForm"
+            type="password"
+            class="form-control appended-form-control"
+            id="signup-repassword"
+            placeholder="Repetir contraseña"
+          />
+          <div class="show-password">
+            <label for="checkrePassRegister">
+              <i *ngIf="!isTextRe" class="far fa-eye"></i>
+              <i *ngIf="isTextRe" class="far fa-eye-slash"></i>
+              <input
+                id="checkrePassRegister"
+                type="checkbox"
+                (click)="showRePassword()"
+              />
+            </label>
+          </div>
+        </div>
+        <footer>
+          <button
+            [class.disabled]="!registerForm.valid"
+            [disabled]="!registerForm.valid"
+            class="btn btn--primary"
+            id="register"
+            type="submit"
+          >
+            Register
+          </button>
+          <a class="t5 text-primary link" [routerLink]="['/auth/login']">
+            <span class="t5 text-secondary">¿ya te registraste? </span>Inicia
+            Sesión
+          </a>
+        </footer>
+      </form>
+    </div>
+    <div class="register__img">
+      <img [src]="authimg" alt="Groovy GIF - Groovy GIFs" />
+    </div>
+  </div>
+</main>

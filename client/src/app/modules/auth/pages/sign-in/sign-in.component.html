@@ -1,0 +1,96 @@
+<main class="login">
+  <div class="login__contain">
+    <div class="login__img">
+      <img [src]="authimg" alt="Groovy GIF - Groovy GIFs" />
+    </div>
+    <div class="login__content">
+      <header class="t2 text-primary">
+        Iniciar Sesión
+        <a class="arrow-back fw-300" [routerLink]="['/']">
+          &larr; Ir al inicio
+        </a>
+      </header>
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="submitForm(loginForm)"
+        novalidate
+      >
+        <div class="form-group">
+          <label
+            *ngIf="fc.valid('emailLoginForm')"
+            for="emailLoginForm"
+            class="text-danger"
+            >{{ fc.error("emailLoginForm", "correo") }}</label
+          >
+          <input
+            formControlName="emailLoginForm"
+            name="emailLoginForm"
+            type="email"
+            class="form-control"
+            id="signin-email"
+            placeholder="Correo"
+          />
+        </div>
+        <div class="form-group">
+          <label
+            *ngIf="fc.valid('passLoginForm')"
+            for="passLoginForm"
+            class="text-danger"
+            >{{ fc.error("passLoginForm", "contraseña") }}</label
+          >
+          <input
+            #showPassLogin
+            formControlName="passLoginForm"
+            name="passLoginForm"
+            type="password"
+            class="form-control appended-form-control"
+            id="signin-password"
+            placeholder="Your password"
+          />
+          <div class="show-password">
+            <label for="checkPassLogin">
+              <i *ngIf="!isText" class="far fa-eye"></i>
+              <i *ngIf="isText" class="far fa-eye-slash"></i>
+              <input
+                id="checkPassLogin"
+                type="checkbox"
+                (click)="showPassword()"
+              />
+            </label>
+          </div>
+        </div>
+        <div class="login__complements">
+          <div class="remember-me">
+            <input
+              id="checkRememberLogin"
+              type="checkbox"
+              [checked]="rememberbool"
+              (change)="rememberbool = !rememberbool"
+            />
+            <label for="checkRememberLogin">Recordarme</label>
+          </div>
+          <a
+            class="t5 forgot-password text-primary"
+            [routerLink]="['/auth/verify']"
+            >¿Olvidaste la contraseña?</a
+          >
+        </div>
+        <footer>
+          <button
+            [class.disabled]="!loginForm.valid"
+            [disabled]="!loginForm.valid"
+            class="btn btn--primary"
+            id="login"
+            type="submit"
+          >
+            Login
+          </button>
+          <a class="t5 text-primary link" [routerLink]="['/auth/register']">
+            <span class="t5 text-secondary">¿no te registraste? </span
+            >Registrate
+          </a>
+        </footer>
+      </form>
+    </div>
+  </div>
+</main>

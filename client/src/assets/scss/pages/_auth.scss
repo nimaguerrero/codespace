@@ -1,0 +1,110 @@
+@use "~src/assets/scss/utilities/color-utilities" as cu;
+@use "~src/assets/scss/utilities/flow" as f;
+@use "~src/assets/scss/abstracts/breakpoints" as bp;
+@use "~src/assets/scss/base/typography" as t;
+@use "sass:math";
+
+.login,
+.register {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__contain {
+    width: 90%;
+    height: 35rem;
+    margin-top: 8rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    border-radius: f.$border-radius;
+    overflow-x: hidden;
+    box-shadow: cu.$box-shadow;
+    @media screen and (min-width: map-get(bp.$bp-width, md)) {
+      width: 40%;
+    }
+  }
+
+  &__content {
+    width: 100%;
+    padding: 2rem;
+    header {
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    form {
+      .form-group {
+        position: relative;
+        label {
+          font-size: math.div(t.$base-font, t.$scale);
+        }
+        .show-password {
+          position: absolute;
+          bottom: 2rem;
+          right: 0;
+          input[type="checkbox"] {
+            display: none;
+          }
+          label {
+            cursor: pointer;
+            font-size: math.div(t.$base-font, t.$scale);
+          }
+        }
+      }
+
+      .forgot-password {
+        width: 100%;
+        text-align: end;
+      }
+      footer {
+        margin-top: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .link {
+          text-align: end;
+          max-width: 50%;
+        }
+      }
+    }
+    @media screen and (min-width: map-get(bp.$bp-width, md)) {
+      width: 48%;
+    }
+  }
+
+  &__img {
+    display: none;
+    @media screen and (min-width: map-get(bp.$bp-width, sm)) {
+      display: block;
+      width: 48%;
+      height: 100%;
+      img {
+        height: 100%;
+      }
+    }
+  }
+
+  &__complements {
+    margin-top: 1rem;
+    text-align: end;
+    .remember-me {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.2rem;
+      label {
+        font-size: math.div(t.$base-font, t.$scale);
+      }
+    }
+  }
+}
+
+.login__contain {
+  height: 27rem;
+}
+
+.register__contain {
+  margin-top: 4rem;
+}

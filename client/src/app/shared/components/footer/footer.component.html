@@ -1,0 +1,123 @@
+<footer class="footer animated fadein">
+  <svg
+    class="wave"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 1200 100"
+    preserveAspectRatio="none"
+  >
+    <path
+      class="wave-path"
+      d="M851.8,100c125,0,288.3-45,348.2-64V0H0v44c3.7-1,7.3-1.9,11-2.9C80.7,22,151.7,10.8,223.5,6.3C276.7,2.9,330,4,383,9.8 c52.2,5.7,103.3,16.2,153.4,32.8C623.9,71.3,726.8,100,851.8,100z"
+    ></path>
+  </svg>
+  <div class="footer__content">
+    <div class="footer__column">
+      <div class="menu">
+        <img class="footer__logo" [src]="logo" alt="Logo MrStems" />
+      </div>
+    </div>
+    <div class="footer__column">
+      <div class="menu">
+        <h3 class="menu__name">Links</h3>
+        <ul class="menu__list">
+          <li class="menu__item">
+            <a
+              [routerLink]="['/']"
+              routerLinkActive="router-link-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              class="menu__link"
+              >Inicio</a
+            >
+          </li>
+          <li class="menu__item">
+            <a
+              [routerLink]="['/songs/tag/acapella']"
+              routerLinkActive="router-link-active"
+              class="menu__link"
+              >Acapellas</a
+            >
+          </li>
+          <li class="menu__item">
+            <a
+              [routerLink]="['/songs/tag/instrumental']"
+              routerLinkActive="router-link-active"
+              class="menu__link"
+              >Instrumentales</a
+            >
+          </li>
+          <li class="menu__item">
+            <a
+              [routerLink]="['/songs/tag/stems']"
+              routerLinkActive="router-link-active"
+              class="menu__link"
+              >Stems</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__column">
+      <div class="menu">
+        <h3 class="menu__name">Legal</h3>
+        <ul class="menu__list">
+          <li class="menu__item">
+            <a
+              [routerLink]="['/legal/legal-information']"
+              routerLinkActive="router-link-active"
+              class="menu__link"
+              >Información legal</a
+            >
+          </li>
+          <li class="menu__item">
+            <a
+              [routerLink]="['/legal/terms-of-use']"
+              routerLinkActive="router-link-active"
+              class="menu__link"
+              >Terminos de uso</a
+            >
+          </li>
+          <li class="menu__item">
+            <a
+              [routerLink]="['/legal/dmca-policy']"
+              routerLinkActive="router-link-active"
+              class="menu__link"
+              >DMCA Policy</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__column">
+      <div class="menu">
+        <h3 class="menu__name">Redes sociales</h3>
+        <ul class="menu__list">
+          <li class="menu__item">
+            <a
+              href="https://www.youtube.com/channel/UCbg3K8d6azxEQoB-OSd-I1w"
+              target="_blank"
+              class="menu__link"
+              >Youtube</a
+            >
+          </li>
+          <li class="menu__item">
+            <a
+              href="https://www.instagram.com/mr.stems/"
+              target="_blank"
+              class="menu__link"
+              >Instagram</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    <div class="copyright__wrapper">
+      <p class="copyright__text">
+        <a class="copyright__link">
+          ©{{ year }}. | Diseñado por: RLVM | Todos los derechos reservados
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>

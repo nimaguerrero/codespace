@@ -1,0 +1,120 @@
+@use "~src/assets/scss/abstracts/colors" as c;
+@use "~src/assets/scss/utilities/color-utilities" as cu;
+@use "~src/assets/scss/abstracts/breakpoints" as bp;
+
+header {
+  z-index: 2;
+  height: 4.2rem;
+  background-color: c.$white-color;
+  box-shadow: cu.$box-shadow;
+  padding: 0 1rem;
+  position: relative;
+  .sidebar {
+    z-index: 4;
+    overflow-x: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0%;
+    height: 100vh;
+    background-color: c.$white-color;
+    transition: width 0.25s ease-in-out;
+    &-right {
+      width: 100%;
+    }
+    ul {
+      margin-top: 8rem;
+      li {
+        height: 5rem;
+        text-align: center;
+        &:nth-child(1) {
+          animation-duration: 0.7s;
+        }
+        &:nth-child(2) {
+          animation-duration: 1s;
+        }
+        &:nth-child(3) {
+          animation-duration: 1.3s;
+        }
+        &:nth-child(4) {
+          animation-duration: 1.5s;
+        }
+        &:hover {
+          color: c.$primary-color;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    ul {
+      display: none;
+      li {
+        padding: 0.5rem 1rem;
+        &:hover {
+          color: c.$primary-color;
+          text-decoration: underline;
+        }
+      }
+      @media screen and (min-width: map-get(bp.$bp-width, md)) {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    label {
+      z-index: 4;
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      width: 40px;
+      cursor: pointer;
+      .bar {
+        background-color: c.$primary-color;
+        border-radius: 10px;
+        height: 3px;
+        margin: 3px 0;
+        transition: 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+        &:nth-of-type(1) {
+          width: 50%;
+        }
+
+        &:nth-of-type(2) {
+          width: 100%;
+        }
+
+        &:nth-of-type(3) {
+          width: 75%;
+        }
+      }
+      input[type="checkbox"] {
+        display: none;
+
+        &:checked ~ .bar:nth-of-type(1) {
+          transform-origin: bottom;
+          transform: rotatez(45deg) translate(5px, -2px);
+        }
+
+        &:checked ~ .bar:nth-of-type(2) {
+          transform-origin: top;
+          transform: rotatez(-45deg);
+        }
+
+        &:checked ~ .bar:nth-of-type(3) {
+          transform-origin: bottom;
+          width: 50%;
+          transform: translate(18px, -2px) rotatez(45deg);
+        }
+        &:checked ~ #sidebar {
+          width: 100%;
+        }
+      }
+      @media screen and (min-width: map-get(bp.$bp-width, md)) {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,182 @@
+@use "../abstracts/colors" as c;
+@use "../abstracts/breakpoints" as bp;
+@use "../base/typography" as t;
+@use "sass:math";
+
+body {
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+  background-color: c.$body-color;
+  color: c.$text-color;
+  min-height: 100vh;
+  font-size: t.$base-font;
+}
+
+h1,
+.t1 {
+  font-size: t.$t2;
+}
+h2,
+.t2 {
+  font-size: t.$t3;
+}
+h3,
+.t3 {
+  font-size: t.$t4;
+}
+h4,
+.t4 {
+  font-size: t.$base-font;
+}
+
+h5,
+.t5 {
+  font-size: math.div(t.$base-font, t.$scale);
+}
+
+@media screen and (min-width: map-get(bp.$bp-width, sm)) {
+  h1,
+  .t1 {
+    font-size: t.$t1;
+    color: c.$dark-color;
+  }
+  h2,
+  .t2 {
+    font-size: t.$t2;
+  }
+  h3,
+  .t3 {
+    font-size: t.$t3;
+  }
+  h4,
+  .t4 {
+    font-size: t.$t4;
+  }
+}
+
+.fw-100 {
+  font-weight: 100;
+}
+.fw-200 {
+  font-weight: 200;
+}
+.fw-300 {
+  font-weight: 300;
+}
+.fw-400 {
+  font-weight: 400;
+}
+.fw-500,
+strong {
+  font-weight: 500;
+}
+
+.text-primary {
+  color: c.$primary-color;
+}
+.text-secondary {
+  color: c.$text-color;
+}
+.text-danger {
+  color: c.$secondary-color;
+}
+
+.mb-1 {
+  margin-bottom: 1rem;
+}
+.mt-1 {
+  margin-top: 1rem;
+}
+.mx-1 {
+  margin: 0 1rem;
+}
+.my-1 {
+  margin: 1rem 0;
+}
+
+hr {
+  width: 100%;
+  height: 0.01rem;
+  background-color: c.$text-color-alt;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li,
+a {
+  text-decoration: none;
+  color: c.$dark-color;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+.d-none {
+  display: none;
+  transition: 0.55s ease-in-out;
+}
+
+.router-link-active {
+  text-decoration: underline;
+  color: c.$primary-color;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+// scroll
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px c.$white-color;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(34, 34, 34, 0.5);
+  // border-radius: 0.625rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: c.$text-color-alt;
+}
+
+.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+// @media screen and (min-width: map-get(bp.$bp-width, sm)) {
+//     @for $i from 1 to 4 {
+//         h#{$i},
+//         .t#{$i} {
+//             $i: $i + 1;
+//             font-size: #{"$t#{$i}"};
+//         }
+//     }
+// }
+
+// @for $i from 1 to 4 {
+//     h#{$i},
+//     .t#{$i} {
+//         font-size: #{"$t#{$i}"};
+//     }
+// }

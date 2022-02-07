@@ -1,0 +1,128 @@
+<header class="animated fadein">
+  <div #sidebar class="sidebar">
+    <ul class="sidebar__list">
+      <li class="sidebar__item">
+        <a
+          [routerLink]="['/']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="router-link-active"
+          class="sidebar__link t3"
+          (click)="openSidebar()"
+          >Inicio
+          <span><i></i></span>
+        </a>
+      </li>
+      <li class="sidebar__item">
+        <a
+          [routerLink]="['/songs/tag/acapella']"
+          routerLinkActive="router-link-active"
+          class="sidebar__link t3"
+          (click)="openSidebar()"
+          >Acapellas
+          <span><i></i></span>
+        </a>
+      </li>
+      <li class="sidebar__item">
+        <a
+          [routerLink]="['/songs/tag/instrumental']"
+          routerLinkActive="router-link-active"
+          class="sidebar__link t3"
+          (click)="openSidebar()"
+          >Instrumentales
+          <span><i></i></span>
+        </a>
+      </li>
+      <li class="sidebar__item">
+        <a
+          [routerLink]="['/songs/tag/stems']"
+          routerLinkActive="router-link-active"
+          class="sidebar__link t3"
+          (click)="openSidebar()"
+          >Stems
+          <span><i></i></span>
+        </a>
+      </li>
+      <li class="sidebar__item">
+        <a
+          *ngIf="uS.isLogged()"
+          [routerLink]="['/profile']"
+          routerLinkActive="router-link-active"
+          class="sidebar__link t3"
+          (click)="openSidebar()"
+          >Mi perfil
+          <span><i></i></span>
+        </a>
+        <a
+          *ngIf="!uS.isLogged()"
+          [routerLink]="['/auth/register']"
+          routerLinkActive="router-link-active"
+          class="sidebar__link t3"
+          (click)="openSidebar()"
+          >Registrarse
+          <span><i></i></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <nav>
+    <label for="check">
+      <input type="checkbox" id="check" (change)="openSidebar()" />
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </label>
+
+    <ul class="nav__list">
+      <li class="nav__item">
+        <a
+          class="text-sm"
+          [routerLink]="['/']"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="router-link-active"
+          >Inicio
+        </a>
+      </li>
+      <li class="nav__item">
+        <a
+          class="text-sm"
+          [routerLink]="['/songs/tag/acapella']"
+          routerLinkActive="router-link-active"
+          >Acapellas
+        </a>
+      </li>
+      <li class="nav__item">
+        <a
+          class="text-sm"
+          [routerLink]="['/songs/tag/instrumental']"
+          routerLinkActive="router-link-active"
+          >Instrumentales
+        </a>
+      </li>
+      <li class="nav__item">
+        <a
+          class="text-sm"
+          [routerLink]="['/songs/tag/stems']"
+          routerLinkActive="router-link-active"
+          >Stems
+        </a>
+      </li>
+    </ul>
+    <ul class="nav__list">
+      <ng-container *ngIf="!uS.isLogged()">
+        <li class="nav__button">
+          <a [routerLink]="['/auth/register']" class="btn btn--register"
+            >Registrarse
+          </a>
+        </li>
+        <li class="nav__button">
+          <a [routerLink]="['/auth/login']" class="btn btn--login">Login </a>
+        </li>
+      </ng-container>
+      <ng-container *ngIf="uS.isLogged()">
+        <li class="nav__item" *ngIf="profileUrl$ | async; let profileUrl">
+          <User-options [profileUrl]="profileUrl"></User-options>
+        </li>
+      </ng-container>
+    </ul>
+  </nav>
+</header>

@@ -1,0 +1,61 @@
+<div class="modal">
+  <div class="paypal">
+    <div class="paypal__header pointer">
+      <h4>Datos e instrucciones</h4>
+      <a (click)="closeModal()"><i class="fas fa-times"></i></a>
+    </div>
+    <div class="paypal__contain">
+      <div class="paypal__info">
+        <p>
+          <strong
+            >&#10003; Escogio {{ tag.name }} de la cancion {{ song.name }} de
+            {{ song.artists | artistas }}.</strong
+          >
+          <br /><br />
+          &#10003; Se le enviará un ticket por el pago realizado para constatar
+          de que ha solicitado ese link
+          <br /><br />
+          &#10003; Su link será enviado a su correo en un plazo de 24 horas.
+          <br /><br />
+          &#10003; Si su link no es enviado en el plazo establecido o presenta
+          otro tipo de problema, no dude en reportarlo ingresando en su cuenta o
+          creando una nueva con este correo. Puede reportarlo en la sección mis
+          órdenes desde su perfil.
+        </p>
+      </div>
+      <div class="paypal__register" *ngIf="!uS.isLogged()">
+        <h5>Vemos que no se ha registrado...</h5>
+        <p class="fw-300">
+          Por favor <br />
+          <a class="text-primary" [routerLink]="['/auth/login']"
+            >Inicie sesión</a
+          >
+          para poder continuar
+        </p>
+      </div>
+      <div class="logged" *ngIf="uS.isLogged()">
+        <h5>Usted ya se registro</h5>
+        <p>Se enviara al correo con la cuenta registrada</p>
+        <button class="btn btn--warning" (click)="createOrder()" type="button">
+          <i class="fab fa-paypal"></i>
+          PayPal
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="finish-order" *ngIf="finishOrder">
+    <div class="finish-order__header pointer">
+      <h4>Compra finalizada</h4>
+      <a (click)="closeModal()"><i class="fas fa-times"></i></a>
+    </div>
+    <p>
+      Su compra ha sido efectuada correctamente
+      <br />
+      <br />
+      <i class="far fa-check-circle"></i>
+      <br />
+      <br />
+      Por favor revise su correo
+    </p>
+  </div>
+</div>

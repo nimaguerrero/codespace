@@ -1,0 +1,62 @@
+<div class="modal">
+  <div class="report">
+    <div class="report__header pointer">
+      <h4>Reportar enlace</h4>
+      <a (click)="closeModal()"><i class="fas fa-times"></i></a>
+    </div>
+    <div class="report__contain">
+      <form
+        [formGroup]="modalReportForm"
+        (ngSubmit)="submitForm(modalReportForm)"
+        novalidate
+      >
+        <div class="form-group">
+          <h5>Tag</h5>
+          <div class="form__group">
+            <div class="select">
+              <select formControlName="tag">
+                <option selected disabled value="">Selecciona tag</option>
+                <ng-container *ngFor="let tag of tags">
+                  <option [value]="tag.id">
+                    {{ tag.name }}
+                  </option>
+                </ng-container>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <h5>Motivo</h5>
+          <div class="select">
+            <select formControlName="problem">
+              <option selected disabled value="">Selecciona motivo</option>
+              <ng-container *ngFor="let problem of problems">
+                <option [value]="problem.name">
+                  {{ problem.name }}
+                </option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <h5>Comentario</h5>
+          <textarea
+            formControlName="note"
+            name=""
+            id=""
+            cols="30"
+            rows="10"
+          ></textarea>
+        </div>
+        <button
+          [class.disabled]="!modalReportForm.valid"
+          [disabled]="!modalReportForm.valid"
+          type="submit"
+          class="btn btn--primary"
+        >
+          Enviar
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

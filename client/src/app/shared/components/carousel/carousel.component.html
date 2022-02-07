@@ -1,0 +1,21 @@
+<ng-container *ngIf="songs$ | async; let songs; else: loading">
+  <div class="carousel">
+    <!-- <input type="radio" name="position" checked /> -->
+    <ng-container *ngFor="let song of songs">
+      <input type="radio" name="position" />
+    </ng-container>
+    <div class="items">
+      <ng-container *ngFor="let song of songs">
+        <div class="item">
+          <Card [song]="song"></Card>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <Loading></Loading>
+</ng-template>
+
+<!-- <img src="https://picsum.photos/200/300" /> -->

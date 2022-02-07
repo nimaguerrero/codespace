@@ -1,0 +1,88 @@
+@use "~src/assets/scss/abstracts/colors" as c;
+@use "~src/assets/scss/utilities/color-utilities" as cu;
+@use "~src/assets/scss/abstracts/breakpoints" as bp;
+
+.profile {
+  background-color: c.$white-color;
+  width: 80%;
+  min-height: 800px;
+  border-radius: 4px;
+  margin: 40px auto;
+
+  header {
+    background-color: c.$primary-color;
+    padding: 0 2rem;
+    height: 6rem;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    img {
+      margin-bottom: -3rem;
+      border-radius: 50%;
+      overflow: hidden;
+      width: 6rem;
+      height: 6rem;
+    }
+    h3 {
+      color: c.$white-color;
+      margin-bottom: 1.3rem;
+    }
+  }
+  &__content {
+    margin-top: 3rem;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    main {
+      width: 90%;
+      h4 {
+        color: c.$text-color-alt;
+      }
+      .orders {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 0.5rem;
+        width: 100%;
+        min-height: 10rem;
+        .order {
+          box-shadow: cu.$box-shadow;
+          width: 90%;
+          padding: 1rem;
+          display: flex;
+          flex-flow: row wrap;
+          align-items: center;
+          justify-content: space-between;
+          p {
+            text-align: start;
+          }
+        }
+      }
+      @media screen and (min-width: map-get(bp.$bp-width,sm)) {
+        width: 70%;
+      }
+    }
+    aside {
+      width: 90%;
+      color: c.$text-color;
+      h5 {
+        color: c.$text-color-alt;
+      }
+      .to-orders {
+        margin-top: 2rem;
+      }
+      .to-home {
+        margin-top: 2rem;
+      }
+      @media screen and (min-width: map-get(bp.$bp-width,sm)) {
+        margin-top: 0.7rem;
+        width: 20%;
+      }
+    }
+  }
+}

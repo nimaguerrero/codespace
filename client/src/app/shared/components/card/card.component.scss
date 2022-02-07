@@ -1,0 +1,115 @@
+@use "~src/assets/scss/base/typography" as t;
+@use "~src/assets/scss/abstracts/colors" as c;
+@use "~src/assets/scss/utilities/flow" as f;
+@use "~src/assets/scss/utilities/color-utilities" as cu;
+@use "~src/assets/scss/abstracts/breakpoints" as bp;
+@use "sass:math";
+
+.card {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  color: c.$white-color;
+  border-radius: f.$border-radius;
+  padding: 2rem;
+  background-size: cover;
+  background-position: center;
+  box-shadow: cu.$box-shadow;
+  transition: all, 0.5s;
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  &__header {
+    width: 100%;
+    height: 3rem;
+  }
+  &__date {
+    max-width: 21%;
+    height: 100%;
+    text-align: center;
+    background-color: transparent;
+    border-radius: 0 0 20% 20%;
+    box-shadow: 0 -0.15rem 0 c.$extra-color-1;
+    p {
+      text-overflow: ellipsis;
+    }
+  }
+  &__tags {
+    position: absolute;
+    top: 5rem;
+    right: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+  &__tag {
+    padding: 0.7em;
+    height: 1.5rem;
+    position: relative;
+    background-color: var(--tag-bfcolor);
+    border-radius: f.$border-radius 0 40% f.$border-radius;
+    @media screen and (min-width: map-get(bp.$bp-width, md)) {
+      padding: 0.7em 1.3em 0.7em 0.7em;
+    }
+    &::before {
+      position: absolute;
+      bottom: 100%;
+      right: 0;
+      content: "";
+      width: 40%;
+      // width: 1.8rem;
+      // height: 0.8rem;
+      height: 30%;
+      clip-path: polygon(
+        79% 38%,
+        88% 24%,
+        100% 0,
+        100% 100%,
+        0 100%,
+        17% 93%,
+        33% 83%,
+        47% 74%,
+        59% 63%,
+        69% 52%
+      );
+      background-color: var(--tag-bfcolor);
+    }
+    // &:nth:nth-child(2) {
+    //     width: 24%;
+    // }
+    // &:nth:nth-child(3) {
+    //     width: 22%;
+    // }
+    // // &:nth-child(n) {
+    // //     width: 20%;
+    // // }
+    // &:last-child {
+    //     width: 20%;
+    // }
+  }
+  &__contain {
+    width: 100%;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+  .card__text {
+    margin-top: -1rem;
+  }
+}
+
+.youtube {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin-bottom: -1rem;
+  &-path {
+    fill: c.$secondary-color;
+  }
+}

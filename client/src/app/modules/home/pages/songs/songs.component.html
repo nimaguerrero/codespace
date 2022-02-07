@@ -1,0 +1,88 @@
+<ng-template #loading>
+  <Loading></Loading>
+</ng-template>
+<Navbar></Navbar>
+<!-- <main class="songs animated fadein">
+  <div class="principal">
+    <div class="principal__avatar">
+      <img [src]="black_logo" alt="Logo MrStems" />
+    </div>
+    <h1>Material para Djs</h1>
+    <h2>Acapellas, instrumentales, stems y muchos más</h2>
+  </div>
+  <div class="search">
+    <input
+      type="search"
+      class="search__term"
+      placeholder="Busca por cancion o artista"
+      id="term"
+      (keyup)="search()"
+    />
+    <button type="button" class="search__button">
+      <i class="fa fa-search"></i>
+    </button>
+  </div>
+
+  <details>
+    <summary>Ordenar por</summary>
+    <div class="filtros">
+      <div class="order filtro">
+        <ul>
+          <li>
+            <a
+              [ngClass]="{ selected: linkSel[0] }"
+              (click)="getSongs('', 1, '', '', 0)"
+              >Recientes</a
+            >
+          </li>
+          <li>
+            <a
+              [ngClass]="{ selected: linkSel[1] }"
+              (click)="getSongs('', 1, 'orden', 'Año de lanzamiento', 1)"
+              >Año de lanzamiento</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <ng-container *ngIf="songs$ | async; let songs; else: loading">
+    <section class="view-cards">
+      <header *ngIf="param.length > 0">
+        <h4>Filtro: {{ param | capitalize }}</h4>
+        <hr />
+      </header>
+      <div class="cards animated fadein">
+        <ng-container *ngFor="let song of songs">
+          <Card [song]="song"></Card>
+        </ng-container>
+      </div>
+      <p *ngIf="songs.length === 0">No hay resultados</p>
+    </section>
+  </ng-container>
+  <div class="pagination">
+    <button
+      [disabled]="!pagination.previous"
+      [class.disabled]="!pagination.previous"
+      [class.btn--primary]="pagination.previous"
+      (click)="getSongs(term, pagination.previous, func, param)"
+      type="button"
+      class="btn"
+    >
+      Prev
+    </button>
+    <span>{{ page }}</span>
+    <button
+      [disabled]="!pagination.next"
+      [class.disabled]="!pagination.next"
+      [class.btn--primary]="pagination.next"
+      (click)="getSongs(term, pagination.next, func, param)"
+      type="button"
+      class="btn btn--primary"
+    >
+      Next
+    </button>
+  </div>
+</main> -->
+<Footer></Footer>

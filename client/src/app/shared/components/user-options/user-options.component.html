@@ -1,0 +1,19 @@
+<label class="dropdown">
+  <div class="dropdown__button">
+    <img class="user-img img-circle" [src]="profileUrl" alt="Perfil" />
+  </div>
+
+  <input type="checkbox" class="dropdown__input" id="test" />
+
+  <ul class="dropdown__menu">
+    <li class="dropdown__item">
+      <a [routerLink]="['/profile']" class="text-sm">Ver perfil</a>
+    </li>
+    <li class="dropdown__item">
+      <a [routerLink]="['/profile/my-orders']" class="text-sm">Mis ordenes</a>
+    </li>
+    <li class="dropdown__item">
+      <a (click)="uS.logout()" class="text-sm">Cerrar Sesión</a>
+    </li>
+  </ul>
+</label>
