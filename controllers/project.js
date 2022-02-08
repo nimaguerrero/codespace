@@ -17,8 +17,7 @@ const {
   conditionNext,
   fillPagesArr
 } = require('../helpers/pages')
-/** Error */
-const { handleError } = require('../helpers/handleError')
+const { filtersHelper } = require('../helpers/filters')
 
 /**
  * Funcion que obtiene las canciones por pagina y por filtro de año de lanzamiento
@@ -35,81 +34,67 @@ const getProjectsByPage = async (req = request, res = response) => {
 
   const page = parseInt(req.query.page)
   const limit = parseInt(req.query.limit)
-
-  // filtro
-  const func = req.query.func
-  const param = req.query.param
+  const filter = parseInt(req.query.filter)
+  const value = parseInt(req.query.value)
 
   const startIndex = (page - 1) * limit
   const endIndex = page * limit
 
-  const songs = {
-    songs: [],
+  const projects = {
+    projects: [],
     next: null,
     previous: null,
     pages: [],
-    longitud: 0
+    size: 0
   }
 
-  try {
-    const longitud = await Project.find({
-      $or: [{ name: regex }, { tag: regex }]
-    }).countDocuments()
-    songs.longitud = longitud
+  const size = await Project.find({
+    $or: [{ name: regex }, { tag: regex }, { language: regex }]
+  }).countDocuments()
+  projects.size = size
 
-    let s
-    if (func === 'orden' && param === 'Año de lanzamiento') {
-      s = await Project.find({
-        $or: [{ name: regex }, { tag: regex }]
-      })
-        .limit(limit)
-        .skip(startIndex)
-        .sort({ release_year: -1 })
-    } else {
-      s = await Project.find({
-        $or: [
-          { name: regex },
-          { tags_names: { $in: [regex] } },
-          { artists: { $in: [regex] } }
-        ]
-      })
-        .limit(limit)
-        .skip(startIndex)
-        .sort({ createdAt: -1 })
-    }
-    songs.songs = s
+  const data = await Project.find({
+    $or: [{ name: regex }, { tag: regex }, { language: regex }]
+  })
+    .limit(limit)
+    .skip(startIndex)
+    .sort({ createdAt: -1 })
 
-    const lengthArr = Math.ceil(longitud / limit)
-    songs.pages = fillPagesArr(lengthArr)
+  projects.projects = filtersHelper(data, filter, value)
 
-    songs.previous = conditionPrevious(startIndex, page, limit)
-    songs.next = conditionNext(endIndex, longitud, page, limit)
+  const lengthArr = Math.ceil(size / limit)
+  projects.pages = fillPagesArr(lengthArr)
 
-    res.json({
-      ok: true,
-      songs
-    })
-  } catch (err) {
-    handleError(res, err)
-  }
+  projects.previous = conditionPrevious(startIndex, page)
+  projects.next = conditionNext(endIndex, size, page)
+
+  res.json({
+    ok: true,
+    msg: 'Todo bien',
+    result: { projects },
+    errors: []
+  })
 }
 
 const getProject = async (req = request, res = response) => {
   const id = req.params.id
-  try {
-    const project = await Project.findById(id)
+  const project = await Project.findById(id)
 
-    if (!project) {
-      return res.status(404).json({ ok: false, project: null })
-    }
-
-    res.json({
-      ok: true,
-      project
+  if (!project) {
+    return res.status(404).json({
+      ok: false,
+      msg: 'No hay proyecto con este id',
+      result: null,
+      errors: []
     })
-  } catch (err) {
-    handleError(res, err)
   }
+
+  res.json({
+    ok: true,
+    msg: 'Todo bien',
+    result: { project },
+    errors: []
+  })
 }
 
 module.exports = {

@@ -8,8 +8,6 @@
 
 const { response, request } = require('express')
 const Client = require('../models/client')
-const { updateCloudinary } = require('../cloudinary/update')
-const { handleError } = require('../helpers/handleError')
 
 /**
  * Función que envia al correo del cliente el link para el cambio de contraseña
@@ -25,44 +23,42 @@ const { handleError } = require('../helpers/handleError')
 const updateClient = async (req = request, res = response) => {
   const newClient = req.body
   const uid = req.uid
-  try {
-    const searchID = await Client.findById(uid)
-    if (!searchID) {
+  const searchID = await Client.findById(uid)
+  if (!searchID) {
+    return res.status(404).json({
+      ok: true,
+      msg: 'Cliente no encontrado por id',
+      result: null,
+      errors: []
+    })
+  }
+
+  if (newClient.email !== searchID.email) {
+    const searchEmail = await Client.findOne({
+      email: newClient.email
+    })
+    if (searchEmail) {
       return res.status(404).json({
         ok: true,
-        msg: 'Cliente no encontrado por id',
-        client: {}
+        msg: 'Este correo ya existe',
+        result: null,
+        errors: []
       })
     }
-
-    if (newClient.email !== searchID.email) {
-      const searchEmail = await Client.findOne({
-        email: newClient.email
-      })
-      if (searchEmail) {
-        return res.status(404).json({
-          ok: true,
-          msg: 'Este correo ya existe',
-          client: {}
-        })
-      }
-    }
-
-    newClient.updatedAt = new Date()
-
-    await updateCloudinary(req, newClient, 'clients')
-
-    await Client.findByIdAndUpdate(uid, newClient, {
-      new: true
-    })
-
-    res.json({
-      ok: true,
-      msg: 'Perfil actualizado'
-    })
-  } catch (error) {
-    handleError(res, error)
   }
+
+  newClient.updatedAt = new Date()
+
+  await Client.findByIdAndUpdate(uid, newClient, {
+    new: true
+  })
+
+  res.json({
+    ok: true,
+    msg: 'Perfil actualizado',
+    result: {},
+    errors: []
+  })
 }
 
 /**
@@ -77,15 +73,25 @@ const updateClient = async (req = request, res = response) => {
  */
 const getProfile = async (req = request, res = response) => {
   const uid = req.uid
-  try {
-    const { profile } = await Client.findById(uid)
+  const { profile } = await Client.findById(uid)
+
+  if (!profile) {
     res.json({
       ok: true,
-      url: profile.url
+      msg: 'No existe el cliente',
+      result: null,
+      errors: []
     })
-  } catch (error) {
-    handleError(res, error)
   }
+
+  res.json({
+    ok: true,
+    msg: 'Todo bien',
+    result: {
+      url: profile.url
+    },
+    errors: []
+  })
 }
 
 /**
@@ -100,11 +106,11 @@ const getProfile = async (req = request, res = response) => {
  */
 const getClient = async (req = request, res = response) => {
   const uid = req.uid
-  try {
-    const { name, lastname, email, country, profile } =
-            await Client.findById(uid)
-    res.json({
-      ok: true,
+  const { name, lastname, email, country, profile } = await Client.findById(uid)
+  res.json({
+    ok: true,
+    msg: 'Todo bien',
+    result: {
       client: {
         name,
         lastname,
@@ -112,10 +118,9 @@ const getClient = async (req = request, res = response) => {
         country,
         profile
       }
-    })
-  } catch (error) {
-    handleError(res, error)
-  }
+    },
+    errors: []
+  })
 }
 
 module.exports = {

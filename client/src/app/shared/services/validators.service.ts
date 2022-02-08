@@ -1,25 +1,25 @@
-import { Injectable } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { Injectable } from '@angular/core'
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms'
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ValidatorsService {
-  onlyEmail = '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$';
-  onlyNumber = '[0-9]{1,6}';
-  onlyString = '^[a-zA-Z_ ]*$';
+  onlyEmail = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'
+  onlyNumber = '[0-9]{1,6}'
+  onlyString = '^[a-zA-ZÀ-ÿs]{1,40}$'
 
   constructor() {}
 
   equalPasswords(pass1Name: string, pass2Name: string) {
     return (formGroup: FormGroup) => {
-      const pass1Control = formGroup.controls[pass1Name];
-      const pass2Control = formGroup.controls[pass2Name];
+      const pass1Control = formGroup.controls[pass1Name]
+      const pass2Control = formGroup.controls[pass2Name]
       if (pass1Control.value === pass2Control.value) {
-        pass2Control.setErrors(null);
+        pass2Control.setErrors(null)
       } else {
-        pass2Control.setErrors({ noEsIgual: true });
+        pass2Control.setErrors({ noEsIgual: true })
       }
-    };
+    }
   }
 }

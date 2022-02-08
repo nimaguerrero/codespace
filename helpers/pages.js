@@ -1,9 +1,9 @@
-const conditionPrevious = (startIndex, page, limit) => {
+const conditionPrevious = (startIndex, page) => {
   if (startIndex > 0) return page - 1
   return null
 }
 
-const conditionNext = (endIndex, longitud, page, limit) => {
+const conditionNext = (endIndex, longitud, page) => {
   if (endIndex < longitud) return page + 1
   return null
 }

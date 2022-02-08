@@ -5,9 +5,7 @@ const nodemailer = require('nodemailer')
 const smtpTransport = require('nodemailer-smtp-transport')
 
 // poner en español la fecha
-const {
-  formatDateToSpanish
-} = require('./formatDateToSpanish')
+const { formatDateToSpanish } = require('./formatDateToSpanish')
 
 // logo, correlativo
 const Setting = require('../models/setting')
@@ -35,21 +33,19 @@ const sendTicket = async (orderId, transaction) => {
       service: 'gmail',
       host: 'smtp.gmail.com',
       auth: {
-        user: 'mrstems21@gmail.com',
+        // TODO: CREAR GMAIL
+        user: 'codespace@gmail.com',
         pass: 'zebdjdlxriizuizc'
       }
     })
   )
 
-  const venta = await Order.findById(orderId).populate(
-    'client',
-    'name lastname email'
-  )
+  const venta = await Order.findById(orderId).populate('client', 'name email')
   const detalles = await OrderDetail.find({ order: orderId }).populate(
     'tag',
     'name search_song'
   )
-  const cliente = `${venta.client.name} ${venta.client.lastname}`
+  const cliente = `${venta.client.name}`
   const f = new Date(venta.createdAt)
   const fecha = formatDateToSpanish(f)
   const data = detalles

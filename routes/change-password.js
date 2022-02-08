@@ -7,8 +7,13 @@ const {
   getTimeCode
 } = require('../controllers/change-password')
 
-router.post('/email', sendEmail)
+const {
+  validateSendEmail,
+  validateUpdatePassword
+} = require('../validators/change-password')
+
 router.get('/:code', getTimeCode)
-router.post('/update-password', updatePassword)
+router.post('/email', validateSendEmail, sendEmail)
+router.post('/update-password', validateUpdatePassword, updatePassword)
 
 module.exports = router

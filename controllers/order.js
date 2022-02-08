@@ -28,8 +28,6 @@ const {
   fillPagesArr
 } = require('../helpers/pages')
 const { paypalHelper } = require('../helpers/paypal')
-/** Error */
-const { handleError } = require('../helpers/handleError')
 
 /**
  * Funcion que obtiene todas las ordenes del cliente
@@ -59,71 +57,69 @@ const getClientOrdersByPage = async (req = request, res = response) => {
     longitud: 0
   }
 
-  try {
-    const longitud = await Order.find({
-      client
-    }).countDocuments()
-    orders.longitud = longitud
-    orders.orders = await Order.find({
-      client
+  const longitud = await Order.find({
+    client
+  }).countDocuments()
+  orders.longitud = longitud
+  orders.orders = await Order.find({
+    client
+  })
+    .limit(limit)
+    .skip(startIndex)
+    .sort({ createdAt: -1 })
+
+  const lengthArr = Math.ceil(longitud / limit)
+  orders.pages = fillPagesArr(lengthArr)
+
+  orders.previous = conditionPrevious(startIndex, page, limit)
+  orders.next = conditionNext(endIndex, longitud, page, limit)
+
+  // foreach para cuando sean mas
+  orders.orders = await Promise.all(
+    orders.orders.map(async (order) => {
+      order.details = await OrderDetail.find({
+        orderId: order._id
+      }).populate('projectId')
+      return order
     })
-      .limit(limit)
-      .skip(startIndex)
-      .sort({ createdAt: -1 })
+  )
 
-    const lengthArr = Math.ceil(longitud / limit)
-    orders.pages = fillPagesArr(lengthArr)
-
-    orders.previous = conditionPrevious(startIndex, page, limit)
-    orders.next = conditionNext(endIndex, longitud, page, limit)
-
-    // foreach para cuando sean mas
-    orders.orders = await Promise.all(
-      orders.orders.map(async (order) => {
-        order.details = await OrderDetail.find(
-          {
-            orderId: order._id
-          }
-        ).populate('projectId')
-        return order
-      })
-    )
-
-    res.json({
-      ok: true,
+  res.json({
+    ok: true,
+    msg: 'Todo bien',
+    result: {
       orders
-    })
-  } catch (err) {
-    handleError(res, err)
-  }
+    },
+    errors: []
+  })
 }
 
 const getTicket = async (req = request, res = response) => {
   const uid = req.uid
   const transaction = req.params.transaction
   let order = []
-  try {
-    if (transaction === 'last') {
-      order = await Order.find({ client: uid })
-        .populate('client', 'name email')
-        .sort({ createdAt: -1 })
-    } else {
-      order = await Order.find({ client: uid, transaction }).populate(
-        'client',
-        'name email'
-      )
-    }
-    const details = await OrderDetail.find({ order }).populate('tag', 'name')
-    res.json({
-      ok: true,
+  if (transaction === 'last') {
+    order = await Order.find({ client: uid })
+      .populate('client', 'name email')
+      .sort({ createdAt: -1 })
+  } else {
+    order = await Order.find({ client: uid, transaction }).populate(
+      'client',
+      'name email'
+    )
+  }
+  const details = await OrderDetail.find({ order }).populate('tag', 'name')
+  res.json({
+    ok: true,
+    msg: 'Todo bien',
+    result: {
       ticket: {
         order: order[0],
         details
       }
-    })
-  } catch (err) {
-    handleError(res, err)
-  }
+    },
+    errors: []
+  })
 }
 
 /**
@@ -140,17 +136,17 @@ const getTicket = async (req = request, res = response) => {
 const createOrder = async (req = request, res = response) => {
   const uid = req.uid
   const projectId = req.params.projectId
-  try {
-    const { links } = await paypalHelper({ uid, projectId })
-    const link = links.filter((link) => link.rel === 'approve')[0]
+  const { links } = await paypalHelper({ uid, projectId })
+  const link = links.filter((link) => link.rel === 'approve')[0]
 
-    res.json({
-      ok: true,
+  res.json({
+    ok: true,
+    msg: 'Todo bien',
+    result: {
       link: link.href
-    })
-  } catch (err) {
-    handleError(res, err)
-  }
+    },
+    errors: []
+  })
 }
 
 /**
@@ -169,30 +165,25 @@ const captureOrder = async (req = request, res = response) => {
   const tagId = req.params.tagId
 
   const { token } = req.query
-  try {
-    const response = await axios.post(
-            `${process.env.PAYPAL_API}/v2/checkout/orders/${token}/capture`,
-            {},
-            {
-              auth: {
-                username: process.env.PAYPAL_API_CLIENT,
-                password: process.env.PAYPAL_API_SECRET
-              }
-            }
-    )
+  const response = await axios.post(
+    `${process.env.PAYPAL_API}/v2/checkout/orders/${token}/capture`,
+    {},
+    {
+      auth: {
+        username: process.env.PAYPAL_API_CLIENT,
+        password: process.env.PAYPAL_API_SECRET
+      }
+    }
+  )
 
-    const transaction =
-            response.data.purchase_units[0].payments.captures[0].id
-    const payer = response.data.payer
+  const transaction = response.data.purchase_units[0].payments.captures[0].id
+  const payer = response.data.payer
 
-    const orderId = await save({ uid, tagId, transaction, payer })
+  const orderId = await save({ uid, tagId, transaction, payer })
 
-    await sendTicket(orderId, transaction)
+  await sendTicket(orderId, transaction)
 
-    res.redirect(`${process.env.HOST}/shop/ticket/last`)
-  } catch (err) {
-    handleError(res, err)
-  }
+  res.redirect(`${process.env.HOST}/shop/ticket/last`)
 }
 
 const cancelOrder = (req = request, res = response) =>

@@ -9,8 +9,6 @@
 const { response, request } = require('express')
 /** Models */
 const Report = require('../models/report')
-/** Error */
-const { handleError } = require('../helpers/handleError')
 
 /**
  * Función para que el cliente cree un reporte
@@ -25,18 +23,17 @@ const { handleError } = require('../helpers/handleError')
 const createReport = async (req = request, res = response) => {
   const addReport = req.body
 
-  try {
-    const newReport = new Report(addReport)
-    await newReport.save()
+  const newReport = new Report(addReport)
+  await newReport.save()
 
-    res.json({
-      ok: true,
-      msg: 'Mensaje enviado',
+  res.json({
+    ok: true,
+    msg: 'Mensaje enviado',
+    result: {
       report: newReport
-    })
-  } catch (err) {
-    handleError(res, err)
-  }
+    },
+    errors: []
+  })
 }
 
 module.exports = {

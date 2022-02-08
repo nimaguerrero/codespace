@@ -1,9 +1,9 @@
 const { Router } = require('express')
-
-const { createReport } = require('../controllers/report')
-
 const router = Router()
 
-router.post('/', createReport)
+const { createReport } = require('../controllers/report')
+const { validateCreateReport } = require('../validators/report')
+
+router.post('/', validateCreateReport, createReport)
 
 module.exports = router

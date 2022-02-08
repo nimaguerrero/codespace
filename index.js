@@ -7,7 +7,6 @@ if (process.env.NODE_ENV !== 'production') {
  * @requires express
  * @requires cors
  * @requires morgan
- * @requires multer
  * @requires path
  * @requires ./config/database
  */
@@ -15,26 +14,19 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const morgan = require('morgan')
-const multer = require('multer')
 const path = require('path')
 
 const { dbConnection } = require('./config/database')
+const { handleError } = require('./helpers/handleError')
 
 app.set('port', process.env.PORT || 3000)
 
-const storage = multer.diskStorage({
-  destination: path.join(__dirname, 'public/uploads'),
-  filename: (req, file, cb) => {
-    cb(null, new Date().getTime() + path.extname(file.originalname))
-  }
-})
-
-app.use(multer({ storage }).single('file'))
 app.use(morgan('tiny'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 app.use(cors())
+app.use(handleError)
 
 dbConnection()
 

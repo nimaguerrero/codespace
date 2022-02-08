@@ -7,7 +7,9 @@ const zfill = (number, width) => {
     if (number < 0) return '-' + numberOutput.toString()
     return numberOutput.toString()
   } else {
-    if (number < 0) return '-' + zero.repeat(width - length) + numberOutput.toString()
+    if (number < 0) {
+      return '-' + zero.repeat(width - length) + numberOutput.toString()
+    }
     return zero.repeat(width - length) + numberOutput.toString()
   }
 }
