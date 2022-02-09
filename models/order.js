@@ -9,7 +9,6 @@ const OrderSchema = new Schema(
     igv: { type: Number, required: true },
     transaction: { type: String, default: '', required: false },
     state: { type: String, default: 'Pendiente', required: true },
-    report: { type: String, required: false },
     createdAt: { type: Date, default: Date.now, required: true },
     payer: { type: Object, required: false } // de paypal
   },

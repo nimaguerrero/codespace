@@ -5,7 +5,7 @@
       <div class="img">
         <img [src]="profileUrl" alt="Perfil" />
       </div>
-      <h3>{{ client.name }} {{ client.lastname }}</h3>
+      <h3>{{ client.name }}</h3>
     </header>
     <div class="profile__content">
       <main>
@@ -24,14 +24,6 @@
               class="form-control"
               id="profile-name"
               placeholder="Nombre"
-            />
-            <input
-              formControlName="lastnameProfileForm"
-              name="lastnameProfileForm"
-              type="text"
-              class="form-control"
-              id="profile-lastname"
-              placeholder="Apellido"
             />
             <input
               formControlName="emailProfileForm"
@@ -87,7 +79,7 @@
       </main>
       <aside>
         <h5>Información</h5>
-        <p>Ultimo cambio: {{ client.updatedAt | date: "short" }}</p>
+        <p>Ultimo cambio: {{ client.updatedAt | date: 'short' }}</p>
         <div class="to-orders">
           <a [routerLink]="['/profile/my-orders']" class="btn btn--primary"
             >Ir a mis ordenes</a

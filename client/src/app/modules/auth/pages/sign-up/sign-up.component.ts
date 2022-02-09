@@ -4,35 +4,35 @@ import {
   OnDestroy,
   ViewChild,
   ElementRef,
-  Renderer2,
-} from '@angular/core';
-import { Location } from '@angular/common';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { NavigationEnd, Router } from '@angular/router';
-import { SignUpService } from './sign-up.service';
-import { ValidatorsService } from '@shared/services/validators.service';
+  Renderer2
+} from '@angular/core'
+import { Location } from '@angular/common'
+import { Validators, FormGroup, FormBuilder } from '@angular/forms'
+import { Subscription } from 'rxjs'
+import { NavigationEnd, Router } from '@angular/router'
+import { SignUpService } from './sign-up.service'
+import { ValidatorsService } from '@shared/services/validators.service'
 
-import { AuthService } from '../../services/auth.service';
-import { environment } from '../../../../../environments/environment.prod';
-import { FormConditionsService } from '../../../../shared/services/form-conditions.service';
+import { AuthService } from '../../services/auth.service'
+import { environment } from '@env/environment'
+import { FormConditionsService } from '@shared/services/form-conditions.service'
 
 @Component({
   selector: 'Sign-up',
-  templateUrl: './sign-up.component.html',
+  templateUrl: './sign-up.component.html'
 })
 export class SignUpComponent implements OnInit, OnDestroy {
-  registerForm!: FormGroup;
-  routeRedirect = '';
-  subs = new Subscription();
-  isText = false;
-  isTextRe = false;
-  @ViewChild('showPassRegister') showPassRegister!: ElementRef;
-  @ViewChild('showrePassRegister') showrePassRegister!: ElementRef;
+  registerForm!: FormGroup
+  routeRedirect = ''
+  subs = new Subscription()
+  isText = false
+  isTextRe = false
+  @ViewChild('showPassRegister') showPassRegister!: ElementRef
+  @ViewChild('showrePassRegister') showrePassRegister!: ElementRef
 
-  authimg = environment.authimg;
+  authimg = environment.authimg
 
-  fc!: FormConditionsService;
+  fc!: FormConditionsService
 
   constructor(
     private _location: Location,
@@ -43,12 +43,12 @@ export class SignUpComponent implements OnInit, OnDestroy {
     private render: Renderer2,
     private valServ: ValidatorsService
   ) {
-    this.initForm();
+    this.initForm()
   }
 
   ngOnInit(): void {}
   ngOnDestroy(): void {
-    this.subs.unsubscribe();
+    this.subs.unsubscribe()
   }
 
   initForm() {
@@ -56,57 +56,48 @@ export class SignUpComponent implements OnInit, OnDestroy {
       {
         nameRegisterForm: [
           '',
-          [Validators.required, Validators.pattern(this.valServ.onlyString)],
-        ],
-        lastnameRegisterForm: [
-          '',
-          [Validators.required, Validators.pattern(this.valServ.onlyString)],
+          [Validators.required, Validators.pattern(this.valServ.onlyString)]
         ],
         emailRegisterForm: [
           '',
-          [Validators.required, Validators.pattern(this.valServ.onlyEmail)],
+          [Validators.required, Validators.pattern(this.valServ.onlyEmail)]
         ],
         passRegisterForm: ['', [Validators.required, Validators.minLength(8)]],
-        repassRegisterForm: [
-          '',
-          [Validators.required, Validators.minLength(8)],
-        ],
+        repassRegisterForm: ['', [Validators.required, Validators.minLength(8)]]
       },
       {
         validators: this.valServ.equalPasswords(
           'passRegisterForm',
           'repassRegisterForm'
-        ),
+        )
       }
-    );
-    this.fc = new FormConditionsService(this.registerForm);
+    )
+    this.fc = new FormConditionsService(this.registerForm)
   }
 
   submitForm(form: FormGroup) {
     if (form.invalid)
       return this.fc.invalidForm([
         'nameRegisterForm',
-        'lastnameRegisterForm',
         'emailRegisterForm',
-        'passRegisterForm',
-      ]);
+        'passRegisterForm'
+      ])
     const user = {
       name: this.fc.control('nameRegisterForm'),
-      lastname: this.fc.control('lastnameRegisterForm'),
       email: this.fc.control('emailRegisterForm'),
-      password: this.fc.control('passRegisterForm'),
-    };
+      password: this.fc.control('passRegisterForm')
+    }
     this.subs.add(
       this.signUpServ.register(user).subscribe(({ token }) => {
-        this.authServ.saveToken(token);
-        this.login();
+        this.authServ.saveToken(token)
+        this.register()
       })
-    );
+    )
   }
 
   showPassword() {
-    const x = this.showPassRegister.nativeElement;
-    this.isText = !this.isText;
+    const x = this.showPassRegister.nativeElement
+    this.isText = !this.isText
     x.type === 'password'
       ? this.render.setAttribute(
           this.showPassRegister.nativeElement,
@@ -117,11 +108,11 @@ export class SignUpComponent implements OnInit, OnDestroy {
           this.showPassRegister.nativeElement,
           'type',
           'password'
-        );
+        )
   }
   showRePassword() {
-    const x = this.showrePassRegister.nativeElement;
-    this.isTextRe = !this.isTextRe;
+    const x = this.showrePassRegister.nativeElement
+    this.isTextRe = !this.isTextRe
     x.type === 'password'
       ? this.render.setAttribute(
           this.showrePassRegister.nativeElement,
@@ -132,24 +123,11 @@ export class SignUpComponent implements OnInit, OnDestroy {
           this.showrePassRegister.nativeElement,
           'type',
           'password'
-        );
+        )
   }
 
   register() {
-    // this.authServ.register();
-    // this.router.navigate(['/']);
-    // this._location.back();
-    // this.router.events.subscribe((event) => {
-    //     if (event instanceof NavigationEnd) {
-    //         console.log(event.url);
-    //         //   this.previousUrl = this.currentUrl;
-    //         //   this.currentUrl = event.url;
-    //     }
-    // });
-  }
-
-  login() {
-    this.authServ.login();
-    this.router.navigate(['/']);
+    this.authServ.login()
+    this.router.navigate(['/'])
   }
 }

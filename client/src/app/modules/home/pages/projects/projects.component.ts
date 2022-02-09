@@ -4,23 +4,23 @@ import {
   OnInit,
   ElementRef,
   Inject,
-  PLATFORM_ID,
+  PLATFORM_ID
 } from '@angular/core'
 import { Observable, Subscription } from 'rxjs'
 import { switchMap, map, delay } from 'rxjs/operators'
 import { SettingService } from '@shared/services/setting.service'
-import { SongsService } from '@shared/services/songs.service'
+import { SongsService } from '@app/shared/services/projects.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { SeoService } from '@shared/services/seo.service'
 import { isPlatformBrowser } from '@angular/common'
-import { Song } from '@core/models/song.model'
+import { Project } from '@app/core/models/project.model'
 
 @Component({
-  selector: 'Songs',
-  templateUrl: './songs.component.html',
-  styleUrls: ['./songs.component.scss'],
+  selector: 'Projects',
+  templateUrl: './projects.component.html',
+  styleUrls: ['./projects.component.scss']
 })
-export class SongsComponent implements OnInit, OnDestroy {
+export class ProjectsComponent implements OnInit, OnDestroy {
   loading = true
   viewDescription = false
   black_logo = ''
@@ -36,10 +36,10 @@ export class SongsComponent implements OnInit, OnDestroy {
     longitud: 1,
     previous: 0,
     next: 2,
-    limit: 1,
+    limit: 1
   }
 
-  songs$!: Observable<Song[]>
+  projects$!: Observable<Project[]>
   subs = new Subscription()
   pagesEl: ElementRef[] = []
 
@@ -49,7 +49,7 @@ export class SongsComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private songsServ: SongsService,
+    private projectsServ: ProjectsService,
     private settingServ: SettingService,
     private seo: SeoService,
     @Inject(PLATFORM_ID) private platformId: Object
@@ -68,7 +68,7 @@ export class SongsComponent implements OnInit, OnDestroy {
       this.route.params
         .pipe(
           map(({ term }) => {
-            term ? this.getSongs(term, 1) : this.getSongs('', 1)
+            term ? this.getProjects(term, 1) : this.getProjects('', 1)
             return term ?? ''
           }),
           switchMap((term: string) => this.getLogo(term))
@@ -86,14 +86,14 @@ export class SongsComponent implements OnInit, OnDestroy {
     this.linkSel[n] = true
   }
 
-  getSongs(term: any, page: number, func = '', param = '', link = 0) {
+  getProjects(term: any, page: number, func = '', param = '', link = 0) {
     this.term = term
     this.page = page
     this.func = func
     this.param = param
     this.linkSelected(link)
-    this.songs$ = this.songsServ
-      .getSongs(term, page, this.limit, this.func, this.param)
+    this.projects$ = this.projectsServ
+      .getProjects(term, page, this.limit, this.func, this.param)
       .pipe(
         // delay(5000),
         map(({ songs, ...data }) => {
@@ -109,7 +109,7 @@ export class SongsComponent implements OnInit, OnDestroy {
       let term: any = document.querySelector('#term')
       term.addEventListener('input', (e: any) => {
         const t = e.currentTarget.value
-        if (t.length > 2 || t.length == 0) return this.getSongs(t, 1)
+        if (t.length > 2 || t.length == 0) return this.getProjects(t, 1)
       })
     }
   }
@@ -124,7 +124,7 @@ export class SongsComponent implements OnInit, OnDestroy {
               title: this.seo.transformTitle(term),
               description: `MrStems - ${term}, ${term} que puedas encontrar de las canciones que mas te gustan`,
               slug: `songs/tag/${term}`,
-              image: url,
+              image: url
             })
           : this.seo.generateTags(this.seo.mrstems.songs, url)
         return url

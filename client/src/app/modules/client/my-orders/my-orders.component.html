@@ -6,8 +6,7 @@
         <img [src]="profileUrl" alt="Perfil" />
       </div>
       <h3>
-        {{ uS.user.name ?? "cargando.." }}
-        {{ uS.user.lastname ?? "cargando.." }}
+        {{ uS.user.name ?? 'cargando..' }}
       </h3>
     </header>
     <div class="profile__content">
@@ -40,12 +39,12 @@
                 >
                   Ver ticket
                 </button>
-                <button
+                <!-- <button
                   class="btn btn--secondary"
                   (click)="report(order.details[0].tag._id, order.transaction)"
                 >
                   Reportar
-                </button>
+                </button> -->
               </div>
             </ng-container>
           </section>
@@ -80,7 +79,7 @@
       <aside>
         <h5>Compras - ({{ pagination.longitud }})</h5>
         <p *ngIf="timeUltimateOrder">
-          Ultima compra: {{ timeUltimateOrder | date: "short" }}
+          Ultima compra: {{ timeUltimateOrder | date: 'short' }}
         </p>
         <p *ngIf="!timeUltimateOrder">Ultima compra: No registra</p>
         <div class="to-orders">

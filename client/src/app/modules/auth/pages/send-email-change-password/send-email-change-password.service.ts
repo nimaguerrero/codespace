@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '@env/environment';
-
+import { Injectable } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
+import { environment } from '@env/environment'
+// TODO: FALTA SU INTERFACE DE SendEmailResponse
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class SendEmailChangePasswordService {
   constructor(private http: HttpClient) {}
@@ -11,6 +11,6 @@ export class SendEmailChangePasswordService {
     return this.http.post<any>(
       `${environment.apiUrl}/change-password/email`,
       email
-    );
+    )
   }
 }

@@ -17,7 +17,7 @@
             *ngIf="fc.valid('nameRegisterForm')"
             for="nameRegisterForm"
             class="text-danger"
-            >{{ fc.error("nameRegisterForm", "nombre") }}</label
+            >{{ fc.error('nameRegisterForm', 'nombre') }}</label
           >
           <input
             formControlName="nameRegisterForm"
@@ -28,28 +28,13 @@
             placeholder="Nombre"
           />
         </div>
-        <div class="form-group">
-          <label
-            *ngIf="fc.valid('lastnameRegisterForm')"
-            for="lastnameRegisterForm"
-            class="text-danger"
-            >{{ fc.error("lastnameRegisterForm", "apellido") }}</label
-          >
-          <input
-            formControlName="lastnameRegisterForm"
-            name="lastnameRegisterForm"
-            type="text"
-            class="form-control"
-            id="signup-lastname"
-            placeholder="Apellidos"
-          />
-        </div>
+
         <div class="form-group">
           <label
             *ngIf="fc.valid('emailRegisterForm')"
             for="emailRegisterForm"
             class="text-danger"
-            >{{ fc.error("emailRegisterForm", "correo") }}</label
+            >{{ fc.error('emailRegisterForm', 'correo') }}</label
           >
           <input
             formControlName="emailRegisterForm"
@@ -66,7 +51,7 @@
             *ngIf="fc.valid('passRegisterForm')"
             for="passRegisterForm"
             class="text-danger"
-            >{{ fc.error("passRegisterForm", "contraseña") }}</label
+            >{{ fc.error('passRegisterForm', 'contraseña') }}</label
           >
           <input
             #showPassRegister
@@ -94,7 +79,7 @@
             *ngIf="fc.valid('repassRegisterForm')"
             for="repassRegisterForm"
             class="text-danger"
-            >{{ fc.error("repassRegisterForm", "contraseña") }}</label
+            >{{ fc.error('repassRegisterForm', 'contraseña') }}</label
           >
           <input
             #showrePassRegister

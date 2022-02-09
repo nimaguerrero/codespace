@@ -1,27 +1,27 @@
 <div
   class="card animated fadein"
-  (click)="goToSong(song.id)"
+  (click)="goToSong(project.id)"
   [ngStyle]="{
-    'background-image': getUrl(song)
+    'background-image': getUrl(project)
   }"
 >
   <div class="card__header">
     <div class="card__date fw-300">
       <p>
-        {{ formatDate(song.createdAt) }}
+        {{ formatDate(project.createdAt) }}
       </p>
     </div>
   </div>
 
   <div class="card__tags">
-    <ng-container *ngFor="let tag of song.tags_names">
+    <!-- <ng-container *ngFor="let tag of song.tags_names">
       <div [style.--tag-bfcolor]="selectColorTag(tag)" class="card__tag fw-300">
         #{{ tag }}
       </div>
-    </ng-container>
+    </ng-container> -->
   </div>
   <div class="card__contain">
-    <ng-container *ngIf="song.link_youtube">
+    <ng-container *ngIf="project.link_youtube">
       <svg
         class="youtube"
         xmlns="http://www.w3.org/2000/svg"
@@ -33,9 +33,9 @@
         ></path>
       </svg>
     </ng-container>
-    <h3 class="card__title">{{ song.name }}</h3>
-    <p class="card__text t4 fw-200">
+    <h3 class="card__title">{{ project.name }}</h3>
+    <!-- <p class="card__text t4 fw-200">
       {{ song.artists | artistas | capitalizeArr }}
-    </p>
+    </p> -->
   </div>
 </div>

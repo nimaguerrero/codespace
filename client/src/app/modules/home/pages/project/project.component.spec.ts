@@ -1,5 +1,5 @@
-import { SongComponent } from './song.component'
-import { SongService } from './song.service'
+import { SongComponent } from './project.component'
+import { SongService } from './project.service'
 import { ModalService } from '@shared/services/modal.service'
 import { SeoService } from '@shared/services/seo.service'
 import { from, of } from 'rxjs'

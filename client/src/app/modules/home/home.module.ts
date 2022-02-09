@@ -1,25 +1,25 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
 
-import { HomeRoutingModule } from './home-routing.module';
-import { SongComponent } from './pages/song/song.component';
-import { SongsComponent } from './pages/songs/songs.component';
-import { SharedModule } from '@shared/shared.module';
-import { ModalCardPayComponent } from './components/modal-card-pay/modal-card-pay.component';
+import { HomeRoutingModule } from './home-routing.module'
+import { ProjectComponent } from './pages/project/project.component'
+import { ProjectsComponent } from './pages/projects/projects.component'
+import { SharedModule } from '@shared/shared.module'
+import { ModalCardPayComponent } from './components/modal-card-pay/modal-card-pay.component'
 
 @NgModule({
   declarations: [
-    SongComponent,
-    SongsComponent,
+    ProjectComponent,
+    ProjectsComponent,
     // COMPONENTS
-    ModalCardPayComponent,
+    ModalCardPayComponent
   ],
   imports: [CommonModule, HomeRoutingModule, SharedModule],
   exports: [
-    SongComponent,
-    SongsComponent,
+    ProjectComponent,
+    ProjectsComponent,
     // COMPONENTS
-    ModalCardPayComponent,
-  ],
+    ModalCardPayComponent
+  ]
 })
 export class HomeModule {}
