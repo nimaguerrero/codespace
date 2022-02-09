@@ -4,7 +4,7 @@ const Project = require('../models/project')
 
 // ventas
 const Order = require('../models/order')
-const OrderDetail = require('../models/order-detail')
+const OrderDetails = require('../models/order-details')
 
 const { zfill } = require('../helpers/zFill')
 
@@ -60,7 +60,7 @@ const save = async ({ uid, projectId, transaction, payer }) => {
   await newOrder.save()
 
   details.forEach(async (detail) => {
-    const newSaleDetail = new OrderDetail(detail)
+    const newSaleDetail = new OrderDetails(detail)
     newSaleDetail.orderId = newOrder.id
     await newSaleDetail.save()
   })

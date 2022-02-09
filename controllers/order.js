@@ -18,7 +18,7 @@ const { response, request } = require('express')
 const axios = require('axios')
 /** Models */
 const Order = require('../models/order')
-const OrderDetail = require('../models/order-detail')
+const OrderDetails = require('../models/order-details')
 /** Helpers */
 const { sendTicket } = require('../helpers/mail')
 const { save } = require('../helpers/order')
@@ -74,21 +74,24 @@ const getClientOrdersByPage = async (req = request, res = response) => {
   orders.previous = conditionPrevious(startIndex, page, limit)
   orders.next = conditionNext(endIndex, longitud, page, limit)
 
-  // foreach para cuando sean mas
-  orders.orders = await Promise.all(
-    orders.orders.map(async (order) => {
-      order.details = await OrderDetail.find({
-        orderId: order._id
-      }).populate('projectId')
-      return order
-    })
-  )
-
   res.json({
     ok: true,
     msg: 'Todo bien',
     result: {
       orders
+    },
+    errors: []
+  })
+}
+
+const getDetails = async (req = request, res = response) => {
+  const orderId = req.params.orderId
+  const details = await OrderDetails.find({ _id: orderId })
+  res.json({
+    ok: true,
+    msg: 'Todo bien',
+    result: {
+      details
     },
     errors: []
   })
@@ -108,7 +111,7 @@ const getTicket = async (req = request, res = response) => {
       'name email'
     )
   }
-  const details = await OrderDetail.find({ order }).populate('tag', 'name')
+  const details = await OrderDetails.find({ order })
   res.json({
     ok: true,
     msg: 'Todo bien',
@@ -191,6 +194,7 @@ const cancelOrder = (req = request, res = response) =>
 
 module.exports = {
   getClientOrdersByPage,
+  getDetails,
   createOrder,
   captureOrder,
   cancelOrder,

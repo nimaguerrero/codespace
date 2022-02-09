@@ -17,7 +17,7 @@ const morgan = require('morgan')
 const path = require('path')
 
 const { dbConnection } = require('./config/database')
-const { handleError } = require('./helpers/handleError')
+const { handleError } = require('./middlewares/handleError')
 
 app.set('port', process.env.PORT || 3000)
 

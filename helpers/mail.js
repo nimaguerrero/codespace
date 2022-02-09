@@ -12,7 +12,7 @@ const Setting = require('../models/setting')
 
 // Venta
 const Order = require('../models/order')
-const OrderDetail = require('../models/order-detail')
+const OrderDetails = require('../models/order-details')
 
 const sendTicket = async (orderId, transaction) => {
   const { logo } = await Setting.findById(process.env.SETTING_ID)
@@ -41,7 +41,7 @@ const sendTicket = async (orderId, transaction) => {
   )
 
   const venta = await Order.findById(orderId).populate('client', 'name email')
-  const detalles = await OrderDetail.find({ order: orderId }).populate(
+  const detalles = await OrderDetails.find({ order: orderId }).populate(
     'tag',
     'name search_song'
   )
