@@ -4,8 +4,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core'
 import { detailsItf } from './models/sale.interface'
 import { SaleClass } from './models/sale.class'
 import { PaypalService } from './paypal.service'
-import { Song } from '@app/core/models/project.model'
-import { Tag } from '@core/models/tag.model'
+import { Project } from '@core/models/project.model'
 import { SettingService } from '@shared/services/setting.service'
 import { ModalService } from '@shared/services/modal.service'
 import { UserService } from '@shared/services/user.service'
@@ -23,8 +22,7 @@ export class ModalCardPayComponent implements OnInit, OnDestroy {
   finishOrder = false
 
   // Servicio
-  song!: Song
-  tag!: Tag
+  project!: Project
   private igv = 0.2
 
   details: detailsItf[] = []
@@ -47,8 +45,7 @@ export class ModalCardPayComponent implements OnInit, OnDestroy {
   }
 
   init() {
-    this.song = this.modalServ.songModal
-    this.tag = this.modalServ.tagModal
+    this.project = this.modalServ.projectModal
   }
 
   closeModal() {
@@ -56,10 +53,10 @@ export class ModalCardPayComponent implements OnInit, OnDestroy {
   }
 
   createOrder() {
-    this.subs.add(
-      this.paypal.createOrder(this.tag.id).subscribe((link) => {
-        location.href = link
-      })
-    )
+    // this.subs.add(
+    //   this.paypal.createOrder(this.tag.id).subscribe((link) => {
+    //     location.href = link
+    //   })
+    // )
   }
 }

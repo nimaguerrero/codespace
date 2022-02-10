@@ -18,3 +18,11 @@ export interface Project {
   createdAt: Date
   updatedAt: Date
 }
+
+export interface ProjectsPagination {
+  projects: Project[]
+  next: number
+  previous: number
+  pages: number[]
+  longitud: number
+}

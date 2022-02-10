@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core'
 import { Observable, Subscription } from 'rxjs'
 import { map } from 'rxjs/operators'
-import { Song } from '@app/core/models/project.model'
-import { SongsService } from '../../services/projects.service'
+import { Project } from '@app/core/models/project.model'
+import { ProjectsService } from '../../services/projects.service'
 
 @Component({
   selector: 'Carousel',
@@ -10,24 +10,24 @@ import { SongsService } from '../../services/projects.service'
   styleUrls: ['./carousel.component.scss']
 })
 export class CarouselComponent implements OnInit, OnDestroy {
-  songs$!: Observable<Song[]>
+  projects$!: Observable<Project[]>
   @Input('term') term!: string
   subs = new Subscription()
 
-  constructor(private songsServ: SongsService) {}
+  constructor(private projectsServ: ProjectsService) {}
 
   ngOnInit(): void {
-    this.relatedSongs()
+    this.relatedProjects()
   }
 
   ngOnDestroy(): void {
     this.subs.unsubscribe()
   }
 
-  relatedSongs() {
-    this.songs$ = this.songsServ
-      .getSongs(this.term, 1, 5)
-      .pipe(map(({ songs }) => songs))
-    this.subs.add(this.songs$.subscribe())
+  relatedProjects() {
+    this.projects$ = this.projectsServ
+      .getProjects(this.term, 1, 5)
+      .pipe(map(({ projects }) => projects))
+    this.subs.add(this.projects$.subscribe())
   }
 }

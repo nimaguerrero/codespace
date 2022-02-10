@@ -53,7 +53,7 @@ export class ProjectComponent implements OnInit {
     this.projectServ
       .getProject(id)
       .pipe(
-        map(({ project, tags }) => {
+        map((project) => {
           this.project = project
           this.carouselTerm = project.name
           this.seo.generateTags({

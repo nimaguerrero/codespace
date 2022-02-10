@@ -1,13 +1,13 @@
-<ng-container *ngIf="songs$ | async; let songs; else: loading">
+<ng-container *ngIf="projects$ | async; let projects; else: loading">
   <div class="carousel">
     <!-- <input type="radio" name="position" checked /> -->
-    <ng-container *ngFor="let song of songs">
+    <ng-container *ngFor="let project of projects">
       <input type="radio" name="position" />
     </ng-container>
     <div class="items">
-      <ng-container *ngFor="let song of songs">
+      <ng-container *ngFor="let project of projects">
         <div class="item">
-          <Card [song]="song"></Card>
+          <Card [project]="project"></Card>
         </div>
       </ng-container>
     </div>

@@ -9,7 +9,7 @@ import {
 } from '@angular/core'
 import { Subscription } from 'rxjs'
 import { FormGroup, Validators, FormBuilder } from '@angular/forms'
-import { IMGTYPES } from '@core/models/img-types.model'
+import { IMGTYPES } from '@global/constants'
 import { ProfileService } from './profile.service'
 import { ToastrService } from 'ngx-toastr'
 import { UserService } from '@shared/services/user.service'
@@ -92,7 +92,6 @@ export class ProfileComponent implements OnInit, OnDestroy, DoCheck {
     if (form.invalid) {
       this.fc.invalidForm([
         'nameProfileForm',
-        'lastnameProfileForm',
         'emailProfileForm',
         'countryProfileForm'
       ])
@@ -103,8 +102,8 @@ export class ProfileComponent implements OnInit, OnDestroy, DoCheck {
         country: form.controls['countryProfileForm'].value
       }
       this.profileServ
-        .updateProfile(user, this.file, this.public_id)
-        .subscribe((msg) => {
+        .updateClient(user, this.file, this.public_id)
+        .subscribe(({ msg, client }) => {
           this.toastr.success(msg)
         })
     }

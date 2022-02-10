@@ -3,6 +3,7 @@ const { Schema, model } = require('mongoose')
 const ReportSchema = new Schema(
   {
     orderId: { type: Schema.Types.ObjectId, ref: 'Order', required: false },
+    projectId: { type: Schema.Types.ObjectId, ref: 'Project', required: false },
     clientId: { type: Schema.Types.ObjectId, ref: 'Client', required: true },
     problem: { type: String, required: true },
     state: { type: String, required: true, default: 'Pendiente' },

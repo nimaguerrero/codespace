@@ -1,21 +1,20 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { REPORT_PROBLEMS } from '@core/models/report-problems';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ModalReportService } from '../modal-report.service';
-import { ToastrService } from 'ngx-toastr';
-import { UserService } from '../../../services/user.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
+import { REPORT_PROBLEMS } from '@global/constants'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { ModalReportService } from '../modal-report.service'
+import { ToastrService } from 'ngx-toastr'
+import { UserService } from '../../../services/user.service'
 
 @Component({
   selector: 'Modal-report-client',
   templateUrl: './modal-report-client.component.html',
-  styleUrls: ['./modal-report-client.component.scss'],
+  styleUrls: ['./modal-report-client.component.scss']
 })
 export class ModalReportClientComponent implements OnInit {
-  @Output() close = new EventEmitter<boolean>();
-  modalReportForm!: FormGroup;
-  @Input() transaction = '';
-  @Input() tag!: string;
-  problems = REPORT_PROBLEMS;
+  @Output() close = new EventEmitter<boolean>()
+  modalReportForm!: FormGroup
+  @Input() transaction = ''
+  problems = REPORT_PROBLEMS
 
   constructor(
     private fb: FormBuilder,
@@ -23,7 +22,7 @@ export class ModalReportClientComponent implements OnInit {
     private toastr: ToastrService,
     private user: UserService
   ) {
-    this.initForm();
+    this.initForm()
   }
 
   ngOnInit(): void {}
@@ -31,8 +30,8 @@ export class ModalReportClientComponent implements OnInit {
   initForm() {
     this.modalReportForm = this.fb.group({
       problem: ['', [Validators.required]],
-      note: [''],
-    });
+      note: ['']
+    })
   }
 
   submitForm(form: FormGroup) {
@@ -40,37 +39,36 @@ export class ModalReportClientComponent implements OnInit {
       return Object.values(form.controls).forEach((control: any) => {
         if (control instanceof FormGroup) {
           Object.values(control.controls).forEach((control) => {
-            control.markAsTouched();
-            this.reset();
-          });
+            control.markAsTouched()
+            this.reset()
+          })
         } else {
-          control.markAsTouched();
-          this.reset();
+          control.markAsTouched()
+          this.reset()
         }
-      });
+      })
     } else {
       const report = {
-        tag: this.tag,
         problem: form.controls['problem'].value,
         note: form.controls['note'].value,
         email: this.user.user.email,
-        transaction: this.transaction,
-      };
-      this.mr.createReportLink(report).subscribe((msg: string) => {
-        this.close.emit(true);
-        this.toastr.success(msg);
-      });
+        transaction: this.transaction
+      }
+      this.mr.createReport(report).subscribe(({ msg, report }) => {
+        this.close.emit(true)
+        this.toastr.success(msg)
+      })
     }
   }
 
   reset() {
     this.modalReportForm.reset({
       problem: '',
-      note: '',
-    });
+      note: ''
+    })
   }
 
   closeModal() {
-    this.close.emit(true);
+    this.close.emit(true)
   }
 }

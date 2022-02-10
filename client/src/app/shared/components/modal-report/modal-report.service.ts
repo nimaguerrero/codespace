@@ -1,17 +1,29 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { Injectable } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
+import { map } from 'rxjs/operators'
+import { environment } from '@env/environment'
+import { Report } from '@core/models/report.interface'
+import { Response } from '@core/models/response.interface'
 
-import { environment } from '@env/environment';
+interface ReportResponse extends Response {
+  result: {
+    report: Report
+  }
+}
+
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ModalReportService {
   constructor(private http: HttpClient) {}
 
-  createReportLink(report: any) {
+  createReport(report: Report) {
     return this.http
-      .post<any>(`${environment.apiUrl}/reports`, report)
-      .pipe(map(({ ok, msg, report }) => msg));
+      .post<ReportResponse>(`${environment.apiUrl}/reports`, report)
+      .pipe(
+        map(({ msg, result }) => {
+          return { msg, report: result.report }
+        })
+      )
   }
 }

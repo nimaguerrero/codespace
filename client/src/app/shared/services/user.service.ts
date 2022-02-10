@@ -50,6 +50,6 @@ export class UserService {
   getProfile(): Observable<string> {
     return this.http
       .get<ProfileResponse>(`${environment.apiUrl}/clients/profile`)
-      .pipe(map(({ result }) => result.profile.uri))
+      .pipe(map(({ result }) => result.profile.url))
   }
 }

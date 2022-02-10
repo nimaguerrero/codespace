@@ -21,7 +21,9 @@ const Report = require('../models/report')
  * @throws
  */
 const createReport = async (req = request, res = response) => {
+  const uid = req.uid
   const addReport = req.body
+  addReport.clientId = uid
 
   const newReport = new Report(addReport)
   await newReport.save()

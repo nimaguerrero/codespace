@@ -1,31 +1,29 @@
-<Navbar></Navbar>
-
 <main class="song animated fadein">
   <div class="song__contain">
     <section class="song__section" *ngIf="!loading">
       <div class="song__header">
-        <h3>{{ song.name }}</h3>
+        <h3>{{ project.name }}</h3>
         <a class="arrow-back fw-300" href="javascript:window.history.back()">
           &larr; Ir atrás
         </a>
       </div>
       <span class="song__fecha t6 fw-300">
-        {{ song.createdAt | date: "fullDate" | capitalize }}
-        {{ song.createdAt | date: "shortTime" }}
+        {{ project.createdAt | date: 'fullDate' | capitalize }}
+        {{ project.createdAt | date: 'shortTime' }}
       </span>
       <div class="song__info">
         <div
-          *ngIf="!song.link_youtube || song.link_youtube.length == 0"
+          *ngIf="!project.link_youtube || project.link_youtube.length == 0"
           class="song__img"
         >
-          <img [src]="song.cover.url" [alt]="song.cover.public_id" />
+          <img [src]="project.cover.url" [alt]="project.cover.public_id" />
         </div>
         <div
-          *ngIf="song.link_youtube && song.link_youtube.length > 0"
+          *ngIf="project.link_youtube && project.link_youtube.length > 0"
           class="song__video"
         >
           <iframe
-            [src]="song.link_youtube | sanitize"
+            [src]="project.link_youtube | sanitize"
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -34,7 +32,7 @@
         </div>
 
         <div class="song__content">
-          <div class="song__tags">
+          <!-- <div class="song__tags">
             <ng-container *ngFor="let tag of song.tags_names">
               <span class="btn btn--outline-primary btn--tag fw-400"
                 >#{{ tag }}</span
@@ -42,26 +40,26 @@
             </ng-container>
           </div>
           <div class="song__autor fw-300">
-            <strong>Autor:</strong> {{ song.author }}
-          </div>
-          <div class="song__artist fw-300">
-            <strong>Artistas:</strong> {{ song.artists | artistas }}
-          </div>
+            <strong>Autor:</strong> {{ project.author }}
+          </div> -->
+          <!-- <div class="song__artist fw-300">
+            <strong>Artistas:</strong> {{ project.artists | artistas }}
+          </div> -->
 
-          <div class="song__artist fw-300">
+          <!-- <div class="song__artist fw-300">
             <strong>Album: </strong> {{ song.album }}
-          </div>
-          <div class="song__genero fw-300">
+          </div> -->
+          <!-- <div class="song__genero fw-300">
             <strong>Genero: </strong>
             {{ song.genres | generos }}
           </div>
           <div class="song__anio fw-300">
             <strong>Año de lanzamiento:</strong>
             {{ song.release_year }}
-          </div>
+          </div> -->
           <div class="song__desc fw-300">
             <strong>Descripcion:</strong>
-            {{ song.description }}
+            {{ project.description }}
           </div>
         </div>
       </div>
@@ -80,7 +78,7 @@
           <th>Enlace directo</th>
           <th>Servidores</th>
         </tr>
-        <ng-container *ngFor="let tag of tags; index as i">
+        <!-- <ng-container *ngFor="let tag of tags; index as i">
           <tr>
             <td data-th="Contenido">{{ tag.name }}</td>
             <td data-th="Enlace con anuncios">
@@ -117,7 +115,7 @@
               />
             </td>
           </tr>
-        </ng-container>
+        </ng-container> -->
 
         <!-- <tr class="empty-table" *ngIf="songs.length == 0">
                             <td colspan="4">No hay resultados</td>
@@ -181,12 +179,10 @@
   </div>
 </main>
 
-<Footer></Footer>
-
 <ng-container *ngIf="openMP">
   <Modal-card-pay (close)="closePaypalModal($event)"></Modal-card-pay>
 </ng-container>
 
-<ng-container *ngIf="openReport">
+<!-- <ng-container *ngIf="openReport">
   <Modal-report (close)="closeReportModal($event)" [tags]="tags"></Modal-report>
-</ng-container>
+</ng-container> -->

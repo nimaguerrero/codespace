@@ -7,8 +7,8 @@ const SettingSchema = new Schema(
     logo: { type: Object, required: true },
     serie: { type: String, required: true },
     correlative: { type: String, required: true },
-    tags: { type: Array, required: true }, // [{name,icon}]
-    languages: { type: Array, required: true } // [{name,icon}]
+    tags: [{ type: Object, required: true }], // [{name,icon}]
+    languages: [{ type: Object, required: true }] // [{name,icon}]
   },
   { collection: 'settings' }
 )

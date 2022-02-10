@@ -6,9 +6,11 @@ import { ProjectComponent } from './pages/project/project.component'
 import { ProjectsComponent } from './pages/projects/projects.component'
 import { SharedModule } from '@shared/shared.module'
 import { ModalCardPayComponent } from './components/modal-card-pay/modal-card-pay.component'
+import { HomeComponent } from './home.component'
 
 @NgModule({
   declarations: [
+    HomeComponent,
     ProjectComponent,
     ProjectsComponent,
     // COMPONENTS
@@ -16,6 +18,7 @@ import { ModalCardPayComponent } from './components/modal-card-pay/modal-card-pa
   ],
   imports: [CommonModule, HomeRoutingModule, SharedModule],
   exports: [
+    HomeComponent,
     ProjectComponent,
     ProjectsComponent,
     // COMPONENTS

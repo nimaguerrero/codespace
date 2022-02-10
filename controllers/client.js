@@ -49,14 +49,25 @@ const updateClient = async (req = request, res = response) => {
 
   newClient.updatedAt = new Date()
 
-  await Client.findByIdAndUpdate(uid, newClient, {
-    new: true
-  })
+  const { name, email, country, profile } = await Client.findByIdAndUpdate(
+    uid,
+    newClient,
+    {
+      new: true
+    }
+  )
 
   res.json({
     ok: true,
     msg: 'Perfil actualizado',
-    result: {},
+    result: {
+      client: {
+        name,
+        email,
+        country,
+        profile
+      }
+    },
     errors: []
   })
 }
@@ -88,7 +99,7 @@ const getProfile = async (req = request, res = response) => {
     ok: true,
     msg: 'Todo bien',
     result: {
-      url: profile.url
+      profile
     },
     errors: []
   })
@@ -106,14 +117,13 @@ const getProfile = async (req = request, res = response) => {
  */
 const getClient = async (req = request, res = response) => {
   const uid = req.uid
-  const { name, lastname, email, country, profile } = await Client.findById(uid)
+  const { name, email, country, profile } = await Client.findById(uid)
   res.json({
     ok: true,
     msg: 'Todo bien',
     result: {
       client: {
         name,
-        lastname,
         email,
         country,
         profile

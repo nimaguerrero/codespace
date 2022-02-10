@@ -1,4 +1,4 @@
 export interface Img {
-  uri: string
-  type: string
+  url: string
+  public_id: string
 }

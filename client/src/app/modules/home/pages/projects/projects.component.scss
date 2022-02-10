@@ -1,8 +1,8 @@
-@use "~src/assets/scss/abstracts/colors" as c;
-@use "~src/assets/scss/utilities/color-utilities" as cu;
-@use "~src/assets/scss/abstracts/breakpoints" as bp;
-@use "~src/assets/scss/base/typography" as t;
-@use "sass:math";
+@use '~src/assets/scss/abstracts/colors' as c;
+@use '~src/assets/scss/utilities/color-utilities' as cu;
+@use '~src/assets/scss/abstracts/breakpoints' as bp;
+@use '~src/assets/scss/base/typography' as t;
+@use 'sass:math';
 
 .songs {
   padding: 0 2rem;
@@ -10,10 +10,10 @@
   details {
     cursor: pointer;
     margin: 0 auto;
-    width: 100%;
-    @media screen and (min-width: map-get(bp.$bp-width,lg)) {
-      width: 15%;
-    }
+    width: 65%;
+    // @media screen and (min-width: map-get(bp.$bp-width,lg)) {
+    //   width: 15%;
+    // }
     &[open] {
       box-shadow: cu.$box-shadow;
       padding-bottom: 1rem;
@@ -26,10 +26,10 @@
       &::-webkit-details-marker,
       &::marker {
         display: none;
-        content: "";
+        content: '';
       }
       &:before {
-        content: "\2636";
+        content: '\2636';
         // content: "\2714";
         // color: #696f7c;
         color: c.$text-color;
@@ -37,34 +37,24 @@
       }
     }
     .filtros {
-      width: 100%;
       display: flex;
-      flex-wrap: wrap;
+      //   flex-wrap: wrap;
       align-items: flex-start;
       justify-content: space-around;
       h5 {
         color: c.$text-color-alt;
         margin: 0;
       }
-      li {
-        margin-bottom: 0.5rem;
-        margin-left: 2.3rem;
-      }
-      a {
-        font-size: math.div(t.$base-font, t.$scale);
-        &:hover {
-          color: c.$primary-color;
+        li {
+          margin-bottom: 0.5rem;
+          margin-left: 2.3rem;
         }
-      }
-      @media screen and (max-width: map-get(bp.$bp-width,sm)) {
-        .filtro {
-          // width: 90%;
-          text-align: center;
-          li {
-            margin-left: 0;
+        a {
+          font-size: math.div(t.$base-font, t.$scale);
+          &:hover {
+            color: c.$primary-color;
           }
         }
-      }
     }
   }
 
@@ -81,7 +71,7 @@
     width: 82%;
     margin: 2rem auto;
     display: flex;
-    input[type="search"] {
+    input[type='search'] {
       height: 44px;
       &:focus {
         color: c.$dark-color;
