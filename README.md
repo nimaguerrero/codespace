@@ -110,3 +110,18 @@ msg: string,
 result: {} || null,
 errors: []
 })
+
+### Lo que falta
+
+Los filtros quieron que sean simultaneos eso es en lado de backend
+En el fronted que se queden con el color ( corregir )
+se muestre logo
+banner al principio
+componente proyectos/:id
+login con google y facebook
+vista sobre nosotros
+vista unetenos
+navbar fixed
+footer
+anuncios de google ads ver
+modal report estan mal
