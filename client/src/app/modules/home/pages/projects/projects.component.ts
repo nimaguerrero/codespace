@@ -13,7 +13,9 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { SeoService } from '@shared/services/seo.service'
 import { isPlatformBrowser } from '@angular/common'
 import { Project } from '@app/core/models/project.model'
-import { ProjectsService } from '@shared/services/projects.service'
+import { ProjectsService } from '@app/modules/home/pages/projects/projects.service'
+import { Tag, Language } from '../../../../core/models/setting.interface'
+import { OTHERFILTERS } from '@app/global/constants'
 
 @Component({
   selector: 'Projects',
@@ -21,15 +23,18 @@ import { ProjectsService } from '@shared/services/projects.service'
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent implements OnInit, OnDestroy {
+  orderBy = OTHERFILTERS.orderBy
+  authors = OTHERFILTERS.authors
+
   loading = true
   viewDescription = false
   logo = ''
   alt = ''
 
-  linkSel: boolean[] = [true, false]
+  linkSel: boolean[] = new Array(10)
   term = ''
   page = 1
-  filter = ''
+  filtro = ''
   value = ''
   pagination = {
     pages: [1],
@@ -39,6 +44,11 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     limit: 1
   }
 
+  ntags = 0
+  tags$!: Observable<Tag[]>
+  nlanguages = 0
+  languages$!: Observable<Language[]>
+  projects: Project[] = []
   projects$!: Observable<Project[]>
   subs = new Subscription()
   pagesEl: ElementRef[] = []
@@ -53,27 +63,35 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     private settingServ: SettingService,
     private seo: SeoService,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) {
+    this.linkSel.fill(false)
+  }
 
   ngOnInit(): void {
-    this.viewProjects()
+    this.getProjects('', 1)
+    this.getTags()
+    this.getLanguages()
   }
 
   ngOnDestroy(): void {
     this.subs.unsubscribe()
   }
 
-  viewProjects() {
-    this.subs.add(
-      this.route.params
-        .pipe(
-          map(({ term }) => {
-            term ? this.getProjects(term, 1) : this.getProjects('', 1)
-            return term ?? ''
-          }),
-          switchMap((term: string) => this.getLogo(term))
-        )
-        .subscribe()
+  getTags() {
+    this.tags$ = this.settingServ.getTags().pipe(
+      map((tags) => {
+        this.ntags = tags.length
+        return tags
+      })
+    )
+  }
+
+  getLanguages() {
+    this.languages$ = this.settingServ.getLanguages().pipe(
+      map((languages) => {
+        this.nlanguages = languages.length
+        return languages
+      })
     )
   }
 
@@ -86,18 +104,28 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     this.linkSel[n] = true
   }
 
-  getProjects(term: any, page: number, filter = '', value = '', link = 0) {
+  getProjects(term: any, page: number) {
     this.term = term
     this.page = page
-    this.filter = filter
+    this.projects$ = this.projectsServ.getProjects(term, page, this.limit).pipe(
+      map(({ projects, ...data }) => {
+        this.loading = false
+        this.pagination = { ...data, limit: this.limit }
+        this.projects = projects
+        return projects
+      })
+    )
+  }
+
+  filterProjects(filtro: string, value: string, link: number) {
+    this.filtro = filtro
     this.value = value
     this.linkSelected(link)
     this.projects$ = this.projectsServ
-      .getProjects(term, page, this.limit, this.filter, this.value)
+      .filterProjects(this.projects, filtro, value)
       .pipe(
-        map(({ projects, ...data }) => {
+        map((projects) => {
           this.loading = false
-          this.pagination = { ...data, limit: this.limit }
           return projects
         })
       )
@@ -114,20 +142,20 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   }
 
   // TODO: CAMBIAR ESTO A FUTURO PARA QUE SE DE UNA SOLA VEZ TIENE QUE VER CON CACHE
-  getLogo(term: string) {
-    return this.settingServ.getLogo().pipe(
-      map(({ url }) => {
-        this.logo = url
-        term.length > 0
-          ? this.seo.generateTags({
-              title: this.seo.transformTitle(term),
-              description: `Codespace - ${term}, ${term} que puedas encontrar proyectos,componentes o apis que te ayuden a facilitar tu trabajo`,
-              slug: `projects/tag/${term}`,
-              image: url
-            })
-          : this.seo.generateTags(this.seo.codespace.projects, url)
-        return url
-      })
-    )
-  }
+  // getLogo(term: string) {
+  //   return this.settingServ.getLogo().pipe(
+  //     map(({ url }) => {
+  //       this.logo = url
+  //       term.length > 0
+  //         ? this.seo.generateTags({
+  //             title: this.seo.transformTitle(term),
+  //             description: `Codespace - ${term}, ${term} que puedas encontrar proyectos,componentes o apis que te ayuden a facilitar tu trabajo`,
+  //             slug: `projects/tag/${term}`,
+  //             image: url
+  //           })
+  //         : this.seo.generateTags(this.seo.codespace.projects, url)
+  //       return url
+  //     })
+  //   )
+  // }
 }

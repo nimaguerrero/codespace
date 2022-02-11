@@ -23,75 +23,58 @@
   </div>
 
   <details>
-    <summary>Ordenar por</summary>
+    <summary><i class="fa-solid fa-filter"></i> Filtros</summary>
     <div class="filtros">
       <ul>
-        <h5>Ordenar por</h5>
-        <li>
-          <a
-            [ngClass]="{ selected: linkSel[0] }"
-            (click)="getProjects('', 1, '', '', 0)"
-            >Recientes</a
-          >
-        </li>
-        <li>
-          <a
-            [ngClass]="{ selected: linkSel[0] }"
-            (click)="getProjects('', 1, '', '', 0)"
-            >Likes</a
-          >
-        </li>
-        <!-- <li>
+        <h5>Tags</h5>
+        <ng-container *ngFor="let tag of tags$ | async; let i = index">
+          <li>
             <a
-              [ngClass]="{ selected: linkSel[1] }"
-              (click)="getProjects('', 1, 'orden', 'Año de lanzamiento', 1)"
-              >Año de lanzamiento</a
+              (click)="filterProjects('tag', tag.name, i)"
+              [ngClass]="{ selected: linkSel[i] }"
             >
-          </li> -->
+              {{ tag.name | capitalize }}</a
+            >
+          </li>
+        </ng-container>
       </ul>
       <ul>
         <h5>Lenguajes de programación</h5>
-        <li>
-          <a
-            [routerLink]="['/projects/language/angular']"
-            routerLinkActive="selected"
-            >Angular</a
-          >
-        </li>
-        <li>
-          <a
-            [routerLink]="['/projects/language/react']"
-            routerLinkActive="selected"
-            >React</a
-          >
-        </li>
-        <li>
-          <a
-            [routerLink]="['/projects/language/java']"
-            routerLinkActive="selected"
-            >Java</a
-          >
-        </li>
+        <ng-container
+          *ngFor="let language of languages$ | async; let i = index"
+        >
+          <li>
+            <a
+              (click)="filterProjects('language', language.name, i)"
+              [ngClass]="{ selected: linkSel[ntags + i] }"
+              >{{ language.name | capitalize }}</a
+            >
+          </li>
+        </ng-container>
       </ul>
       <ul>
-        <h5>Tags</h5>
-        <li>
-          <a
-            [routerLink]="['/projects/tag/angular']"
-            routerLinkActive="selected"
-            >Proyectos</a
-          >
-        </li>
-        <li>
-          <a [routerLink]="['/projects/tag/react']" routerLinkActive="selected"
-            >Componentes</a
-          >
-        </li>
-        <li>
-          <a [routerLink]="['/projects/tag/java']" routerLinkActive="selected"
-            >Apis</a
-          >
-        </li>
+        <h5>Ordenar por</h5>
+        <ng-container *ngFor="let item of orderBy; let i = index">
+          <li>
+            <a
+              (click)="filterProjects(item.route, '', i)"
+              [ngClass]="{ selected: linkSel[7] }"
+              >{{ item.name }}</a
+            >
+          </li>
+        </ng-container>
+      </ul>
+      <ul>
+        <h5>Autor</h5>
+        <ng-container *ngFor="let author of authors; let i = index">
+          <li>
+            <a
+              (click)="filterProjects(author.route, author.name, i)"
+              [ngClass]="{ selected: linkSel[7] }"
+              >{{ author.name }}</a
+            >
+          </li>
+        </ng-container>
       </ul>
     </div>
   </details>
@@ -115,7 +98,7 @@
       [disabled]="!pagination.previous"
       [class.disabled]="!pagination.previous"
       [class.btn--primary]="pagination.previous"
-      (click)="getProjects(term, pagination.previous, filter, value)"
+      (click)="getProjects(term, pagination.previous)"
       type="button"
       class="btn"
     >
@@ -126,7 +109,7 @@
       [disabled]="!pagination.next"
       [class.disabled]="!pagination.next"
       [class.btn--primary]="pagination.next"
-      (click)="getProjects(term, pagination.next, filter, value)"
+      (click)="getProjects(term, pagination.next)"
       type="button"
       class="btn btn--primary"
     >

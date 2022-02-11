@@ -2,7 +2,7 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core'
 import { Observable, Subscription } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { Project } from '@app/core/models/project.model'
-import { ProjectsService } from '../../services/projects.service'
+import { ProjectsService } from '../../../modules/home/pages/projects/projects.service'
 
 @Component({
   selector: 'Carousel',

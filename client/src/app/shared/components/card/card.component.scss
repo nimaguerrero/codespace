@@ -1,9 +1,9 @@
-@use "~src/assets/scss/base/typography" as t;
-@use "~src/assets/scss/abstracts/colors" as c;
-@use "~src/assets/scss/utilities/flow" as f;
-@use "~src/assets/scss/utilities/color-utilities" as cu;
-@use "~src/assets/scss/abstracts/breakpoints" as bp;
-@use "sass:math";
+@use '~src/assets/scss/base/typography' as t;
+@use '~src/assets/scss/abstracts/colors' as c;
+@use '~src/assets/scss/utilities/flow' as f;
+@use '~src/assets/scss/utilities/color-utilities' as cu;
+@use '~src/assets/scss/abstracts/breakpoints' as bp;
+@use 'sass:math';
 
 .card {
   cursor: pointer;
@@ -38,7 +38,7 @@
   }
   &__tags {
     position: absolute;
-    top: 5rem;
+    top: 6rem;
     right: 0;
     width: 100%;
     display: flex;
@@ -46,6 +46,15 @@
     align-items: flex-end;
     justify-content: flex-start;
     gap: 1rem;
+  }
+  &__icons {
+    position: absolute;
+    top: 3rem;
+    right: 1.4rem;
+    width: 8rem;
+    background: green;
+    display: flex;
+    color: #fff;
   }
   &__tag {
     padding: 0.7em;
@@ -60,7 +69,7 @@
       position: absolute;
       bottom: 100%;
       right: 0;
-      content: "";
+      content: '';
       width: 40%;
       // width: 1.8rem;
       // height: 0.8rem;

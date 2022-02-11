@@ -1,10 +1,15 @@
-const filtersHelper = (projects, filter, value) => {
+const filtersHelper = (projects, filtro, value) => {
   const FILTERS = {
-    free: projects.filter(({ price }) => price === 0),
-    price: projects.filter(({ price }) => price < value),
-    stars: projects.filter(({ stars }) => stars < value)
+    language: projects.filter(({ language }) => language.name === value),
+    tag: projects.filter(({ tag }) => tag.name === value),
+    price: projects.sort((a, b) =>
+      a.price > b.price ? 1 : b.price > a.price ? -1 : 0
+    ),
+    stars: projects.sort((a, b) =>
+      a.stars > b.stars ? 1 : b.stars > a.stars ? -1 : 0
+    )
   }
-  return FILTERS[filter] || projects
+  return FILTERS[filtro] || projects
 }
 
 module.exports = { filtersHelper }

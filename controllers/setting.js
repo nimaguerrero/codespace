@@ -30,7 +30,29 @@ const getLogo = async (req = request, res = response) => {
   })
 }
 
+const getLanguages = async (req = request, res = response) => {
+  const { languages } = await Setting.findById(process.env.SETTING_ID)
+  res.json({
+    ok: true,
+    msg: 'Todo bien',
+    result: { languages },
+    errors: []
+  })
+}
+
+const getTags = async (req = request, res = response) => {
+  const { tags } = await Setting.findById(process.env.SETTING_ID)
+  res.json({
+    ok: true,
+    msg: 'Todo bien',
+    result: { tags },
+    errors: []
+  })
+}
+
 module.exports = {
   getIgv,
-  getLogo
+  getLogo,
+  getTags,
+  getLanguages
 }

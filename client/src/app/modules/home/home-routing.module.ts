@@ -16,10 +16,6 @@ const routes: Routes = [
       {
         path: 'projects/:id',
         component: ProjectComponent
-      },
-      {
-        path: 'projects/tag/:term',
-        component: ProjectsComponent
       }
     ]
   }

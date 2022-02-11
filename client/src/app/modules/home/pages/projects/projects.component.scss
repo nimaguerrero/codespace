@@ -28,33 +28,25 @@
         display: none;
         content: '';
       }
-      &:before {
-        content: '\2636';
-        // content: "\2714";
-        // color: #696f7c;
-        color: c.$text-color;
-        margin-right: 5px;
-      }
     }
     .filtros {
       display: flex;
-      //   flex-wrap: wrap;
+      flex-wrap: wrap;
       align-items: flex-start;
       justify-content: space-around;
       h5 {
         color: c.$text-color-alt;
-        margin: 0;
+        margin: 0.4rem 0 0.5rem 0;
       }
-        li {
-          margin-bottom: 0.5rem;
-          margin-left: 2.3rem;
+      li {
+        margin-bottom: 0.4rem;
+      }
+      a {
+        font-size: math.div(t.$base-font, t.$scale);
+        &:hover {
+          color: c.$primary-color;
         }
-        a {
-          font-size: math.div(t.$base-font, t.$scale);
-          &:hover {
-            color: c.$primary-color;
-          }
-        }
+      }
     }
   }
 

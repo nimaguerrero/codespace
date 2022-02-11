@@ -34,8 +34,6 @@ const getProjectsByPage = async (req = request, res = response) => {
 
   const page = parseInt(req.query.page)
   const limit = parseInt(req.query.limit)
-  const filter = parseInt(req.query.filter)
-  const value = parseInt(req.query.value)
 
   const startIndex = (page - 1) * limit
   const endIndex = page * limit
@@ -49,18 +47,16 @@ const getProjectsByPage = async (req = request, res = response) => {
   }
 
   const size = await Project.find({
-    $or: [{ name: regex }, { tag: regex }, { language: regex }]
+    $or: [{ name: regex }, { description: regex }]
   }).countDocuments()
   projects.size = size
 
-  const data = await Project.find({
-    $or: [{ name: regex }, { tag: regex }, { language: regex }]
+  projects.projects = await Project.find({
+    $or: [{ name: regex }, { description: regex }]
   })
     .limit(limit)
     .skip(startIndex)
     .sort({ createdAt: -1 })
-
-  projects.projects = filtersHelper(data, filter, value)
 
   const lengthArr = Math.ceil(size / limit)
   projects.pages = fillPagesArr(lengthArr)
@@ -72,6 +68,21 @@ const getProjectsByPage = async (req = request, res = response) => {
     ok: true,
     msg: 'Todo bien',
     result: { projects },
+    errors: []
+  })
+}
+
+const filterProjects = (req = request, res = response) => {
+  const { projects } = req.body
+  const filtro = req.query.filtro
+  const value = req.query.value
+  const filterP = filtersHelper(projects, filtro, value)
+  res.json({
+    ok: true,
+    msg: 'Todo bien',
+    result: {
+      projects: filterP
+    },
     errors: []
   })
 }
@@ -99,5 +110,6 @@ const getProject = async (req = request, res = response) => {
 
 module.exports = {
   getProjectsByPage,
-  getProject
+  getProject,
+  filterProjects
 }

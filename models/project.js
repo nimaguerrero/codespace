@@ -5,9 +5,9 @@ const ProjectSchema = new Schema(
     name: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
-    tag: { type: String, required: true },
+    tag: { type: Object, required: true },
     link_youtube: { type: String, required: false },
-    language: { type: String, required: true },
+    language: { type: Object, required: true },
     cover: {
       type: Object,
       required: true,

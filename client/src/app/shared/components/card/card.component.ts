@@ -11,11 +11,6 @@ import { Project } from '@app/core/models/project.model'
 })
 export class CardComponent implements OnInit {
   @Input('project') project: any
-  colors: any = [
-    { Acapella: '#6a67ce' },
-    { Instrumental: '#fc636b' },
-    { Stems: '#1aafd0' }
-  ]
 
   constructor(private router: Router, private TA: TimeAgoService) {}
 
@@ -36,8 +31,5 @@ export class CardComponent implements OnInit {
   formatDate(date: any) {
     this.TA.timeagoCambioIdioma()
     return format(date, 'es_ES')
-  }
-  selectColorTag(tag: string) {
-    return this.colors.find((color: any) => color[tag])[tag]
   }
 }
