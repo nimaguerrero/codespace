@@ -7,6 +7,7 @@ import { ProjectsComponent } from './pages/projects/projects.component'
 import { SharedModule } from '@shared/shared.module'
 import { ModalCardPayComponent } from './components/modal-card-pay/modal-card-pay.component'
 import { HomeComponent } from './home.component'
+import { IconsModule } from '@app/icons/icons.module'
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { HomeComponent } from './home.component'
     // COMPONENTS
     ModalCardPayComponent
   ],
-  imports: [CommonModule, HomeRoutingModule, SharedModule],
+  imports: [CommonModule, HomeRoutingModule, SharedModule, IconsModule],
   exports: [
     HomeComponent,
     ProjectComponent,

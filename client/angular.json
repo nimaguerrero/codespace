@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mrstems": {
+    "codespace": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/mrstems/browser",
+            "outputPath": "dist/codespace/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -70,11 +70,11 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "mrstems:build:production"
+              "browserTarget": "codespace:build:production"
             },
             "development": {
               "port": 5000,
-              "browserTarget": "mrstems:build:development"
+              "browserTarget": "codespace:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "mrstems:build"
+            "browserTarget": "codespace:build"
           }
         },
         "test": {
@@ -101,7 +101,7 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/mrstems/server",
+            "outputPath": "dist/codespace/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
             "inlineStyleLanguage": "scss"
@@ -128,12 +128,12 @@
           "builder": "@nguniversal/builders:ssr-dev-server",
           "configurations": {
             "development": {
-              "browserTarget": "mrstems:build:development",
-              "serverTarget": "mrstems:server:development"
+              "browserTarget": "codespace:build:development",
+              "serverTarget": "codespace:server:development"
             },
             "production": {
-              "browserTarget": "mrstems:build:production",
-              "serverTarget": "mrstems:server:production"
+              "browserTarget": "codespace:build:production",
+              "serverTarget": "codespace:server:production"
             }
           },
           "defaultConfiguration": "development"
@@ -145,12 +145,12 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "mrstems:build:production",
-              "serverTarget": "mrstems:server:production"
+              "browserTarget": "codespace:build:production",
+              "serverTarget": "codespace:server:production"
             },
             "development": {
-              "browserTarget": "mrstems:build:development",
-              "serverTarget": "mrstems:server:development"
+              "browserTarget": "codespace:build:development",
+              "serverTarget": "codespace:server:development"
             }
           },
           "defaultConfiguration": "production"
@@ -158,5 +158,5 @@
       }
     }
   },
-  "defaultProject": "mrstems"
+  "defaultProject": "codespace"
 }

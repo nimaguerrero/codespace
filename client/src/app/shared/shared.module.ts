@@ -22,6 +22,7 @@ import { SanitizePipe } from './pipes/sanitize.pipe'
 import { SanitizeStylePipe } from './pipes/sanitizeStyle.pipe'
 import { ThousandSuffixesPipe } from './pipes/thousandSuff.pipe'
 import { noPointPipe } from './pipes/noPoint.pipe'
+import { IconsModule } from '../icons/icons.module'
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { noPointPipe } from './pipes/noPoint.pipe'
     ThousandSuffixesPipe,
     noPointPipe
   ],
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, IconsModule],
   exports: [
     NavbarComponent,
     UserOptionsComponent,

@@ -71,7 +71,7 @@
     background-color: var(--tag-bfcolor);
     border-radius: f.$border-radius 0 40% f.$border-radius;
     @media screen and (min-width: map-get(bp.$bp-width, md)) {
-      padding: 0.7em 1.3em 0.7em 0.7em;
+      padding: 0.7em 2em 0.7em 0.7em;
     }
     &::before {
       position: absolute;
@@ -79,8 +79,6 @@
       right: 0;
       content: '';
       width: 40%;
-      // width: 1.8rem;
-      // height: 0.8rem;
       height: 30%;
       clip-path: polygon(
         79% 38%,
@@ -96,18 +94,6 @@
       );
       background-color: var(--tag-bfcolor);
     }
-    // &:nth:nth-child(2) {
-    //     width: 24%;
-    // }
-    // &:nth:nth-child(3) {
-    //     width: 22%;
-    // }
-    // // &:nth-child(n) {
-    // //     width: 20%;
-    // // }
-    // &:last-child {
-    //     width: 20%;
-    // }
   }
   &__contain {
     width: 100%;
