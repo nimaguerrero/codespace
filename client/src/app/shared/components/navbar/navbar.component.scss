@@ -1,6 +1,6 @@
-@use "~src/assets/scss/abstracts/colors" as c;
-@use "~src/assets/scss/utilities/color-utilities" as cu;
-@use "~src/assets/scss/abstracts/breakpoints" as bp;
+@use '~src/assets/scss/abstracts/colors' as c;
+@use '~src/assets/scss/utilities/color-utilities' as cu;
+@use '~src/assets/scss/abstracts/breakpoints' as bp;
 
 header {
   z-index: 2;
@@ -59,6 +59,9 @@ header {
           text-decoration: underline;
         }
       }
+      .nav__button {
+        padding: 0.5rem 0.5rem;
+      }
       @media screen and (min-width: map-get(bp.$bp-width, md)) {
         display: flex;
         align-items: center;
@@ -90,7 +93,7 @@ header {
           width: 75%;
         }
       }
-      input[type="checkbox"] {
+      input[type='checkbox'] {
         display: none;
 
         &:checked ~ .bar:nth-of-type(1) {

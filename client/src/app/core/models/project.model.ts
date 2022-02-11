@@ -12,6 +12,8 @@ export interface Project {
   cover: Img
   preview: string
   download: string
+  likes: number
+  ndownloads: number
   stars: number
   state: string
   active: boolean
