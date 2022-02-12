@@ -54,6 +54,7 @@ const getProjectsByPage = async (req = request, res = response) => {
   projects.projects = await Project.find({
     $or: [{ name: regex }, { description: regex }]
   })
+    .populate('author', 'name profile')
     .limit(limit)
     .skip(startIndex)
     .sort({ createdAt: -1 })

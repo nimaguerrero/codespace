@@ -5,11 +5,12 @@ export interface Project {
   name: string
   description: string
   price: number
-  tag: string
-  language: string
+  tag: { name: string; color: string }
+  language: { name: string; color: string }
   link_youtube?: string
   imgs: Img[]
   cover: Img
+  author: { name: string; profile: Img }
   preview: string
   download: string
   likes: number

@@ -16,6 +16,7 @@ const ProjectSchema = new Schema(
         public_id: 'codespace/no-image_dgujkr_ymzbux'
       }
     },
+    author: { type: Schema.Types.ObjectId, ref: 'Client', required: true },
     imgs: [{ type: Object, required: true }],
     preview: { type: String, required: true },
     download: { type: String, required: true },

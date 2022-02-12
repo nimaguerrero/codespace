@@ -39,24 +39,31 @@
     </div>
   </div>
   <div class="card__contain">
-    <ng-container *ngIf="project.link_youtube">
-      <YoutubeIcon></YoutubeIcon>
-    </ng-container>
     <footer>
       <div class="contain">
+        <div class="circle-author">
+          <img [src]="project.author.profile.url" alt="" />
+        </div>
         <div class="content">
           <h3 class="title">{{ project.name }}</h3>
-          <p class="text t4 fw-200">
-            {{ project.description.slice(0, 20) }}...
-          </p>
+          <!-- <p class="text fw-200">{{ project.description.slice(0, 20) }}...</p> -->
         </div>
-        <div class="circle-price">
+        <button
+          [ngStyle]="{ 'background-color': project.tag.color }"
+          class="btn btn--primary"
+        >
+          {{ project.price | currency: 'CAD':'symbol-narrow' | noPoint }}
+        </button>
+        <!-- <div class="circle-price">
           <span>
-            {{ project.price | currency: 'CAD':'symbol-narrow' | noPoint }}
+
           </span>
-        </div>
+        </div> -->
       </div>
-      <div class="icons">
+      <div
+        class="icons"
+        [ngStyle]="{ 'border-top': selectBorderColor(project.tag.color) }"
+      >
         <div class="likes">
           <HeartLikeIcon></HeartLikeIcon>
           Me gusta

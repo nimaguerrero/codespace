@@ -36,6 +36,11 @@ export class ProjectComponent implements OnInit {
     })
   }
 
+  getUrl(url: string) {
+    return `linear-gradient(to bottom, rgba(238, 238, 238, 1), rgba(40, 45, 49, 0.4)),
+    url(${url})`
+  }
+
   closePaypalModal(close: boolean) {
     this.openMP = !close
   }

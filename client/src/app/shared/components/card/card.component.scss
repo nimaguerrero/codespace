@@ -12,7 +12,7 @@
   align-items: flex-end;
   justify-content: flex-start;
   color: c.$white-color;
-  border-radius: f.$border-radius;
+  border-radius: f.$border-radius-card;
   padding: 2rem;
   background-size: cover;
   background-position: center;
@@ -22,6 +22,7 @@
   overflow: hidden;
   text-decoration: none;
   h3 {
+    font-size: t.$t4;
     margin: 0;
   }
   &__header {
@@ -109,50 +110,41 @@
     flex-direction: column;
     .contain {
       display: flex;
-      justify-content: space-between;
+      gap: 1rem;
       align-items: flex-start;
       .content {
         text-align: left;
       }
       .text {
-        margin: 0.4rem 0 0 0;
+        margin: 0.1rem 0 0 0;
         max-height: 1.7rem;
         overflow: hidden;
       }
-      .circle-price {
+      .circle-author {
         border-radius: 50%;
+        overflow: hidden;
         width: 2.7rem;
         height: 2.7rem;
-        background: c.$primary-color;
-        display: grid;
-        place-content: center;
-        word-wrap: break-all;
-        padding: 0.5rem;
-        font-size: 0.8rem;
-        span {
-          max-width: 100%;
-          text-overflow: ellipsis;
-          overflow: hidden;
-        }
+        // background: c.$primary-color;
+        // display: grid;
+        // place-content: center;
+        // word-wrap: break-all;
+        // padding: 0.5rem;
+        // font-size: 0.8rem;
+        // span {
+        //   max-width: 100%;
+        //   text-overflow: ellipsis;
+        //   overflow: hidden;
+        // }
       }
     }
     .icons {
-      border-top: 1.2px solid #ccc;
       padding-top: 0.5rem;
       margin-top: 1rem;
       display: flex;
       align-items: flex-end;
-      gap: 1rem;
-      color: #fff;
+      justify-content: space-between;
+      color: c.$white-color;
     }
-  }
-}
-
-.youtube {
-  height: 1.5rem;
-  width: 1.5rem;
-  margin-bottom: -1rem;
-  &-path {
-    fill: c.$secondary-color;
   }
 }

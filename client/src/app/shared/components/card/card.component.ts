@@ -28,6 +28,10 @@ export class CardComponent implements OnInit {
     }
   }
 
+  selectBorderColor(color: string) {
+    return `3px solid ${color}`
+  }
+
   formatDate(date: any) {
     this.TA.timeagoCambioIdioma()
     return format(date, 'es_ES')
