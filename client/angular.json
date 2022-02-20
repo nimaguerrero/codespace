@@ -34,6 +34,14 @@
             "scripts": []
           },
           "configurations": {
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ]
+            },
             "production": {
               "budgets": [
                 {
@@ -71,6 +79,10 @@
           "configurations": {
             "production": {
               "browserTarget": "codespace:build:production"
+            },
+            "staging": {
+              "port": 4200,
+              "browserTarget": "codespace:build:staging"
             },
             "development": {
               "port": 5000,

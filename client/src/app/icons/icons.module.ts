@@ -9,6 +9,8 @@ import { DownloadIcon } from './download/download.component'
 import { StarIcon } from './star/star.component'
 import { YoutubeIcon } from './youtube/youtube.component'
 import { SearchIcon } from './search/search.component'
+import { CartIcon } from './cart/cart.component'
+import { WavyIcon } from './wavy/wavy.component'
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { SearchIcon } from './search/search.component'
     DownloadIcon,
     StarIcon,
     YoutubeIcon,
-    SearchIcon
+    SearchIcon,
+    CartIcon,
+    WavyIcon
   ],
   imports: [CommonModule],
   exports: [
@@ -32,7 +36,9 @@ import { SearchIcon } from './search/search.component'
     DownloadIcon,
     StarIcon,
     YoutubeIcon,
-    SearchIcon
+    SearchIcon,
+    CartIcon,
+    WavyIcon
   ]
 })
 export class IconsModule {}

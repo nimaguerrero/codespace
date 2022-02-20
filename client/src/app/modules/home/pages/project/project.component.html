@@ -1,38 +1,87 @@
-<section class="grid1">
-  <div class="img1">
-    <img [src]="project.imgs[0].url" alt="" />
-  </div>
-
-  <div class="img2">
-    <img [src]="project.imgs[1].url" alt="" />
-  </div>
-
-  <div class="strapline">
-    <blockquote>
-      {{ project.description }}
-    </blockquote>
-  </div>
-
-  <div
-    class="img3"
-    [ngStyle]="{
-      'background-image': getUrl(project.cover.url)
-    }"
-  ></div>
-
-  <div class="cta-wrapper">
-    <div class="cta">
-      <h2>{{ project.name }}</h2>
-      <p>
-        {{ project.tag.name }} - {{ project.language.name }} -
-        {{ project.createdAt | date }}
-      </p>
-      <a class="button" href="">View Product Details →</a>
+<ng-container *ngIf="project; else loading">
+  <section class="grid1">
+    <div class="img1">
+      <img [src]="project.imgs[0].url" alt="" />
     </div>
-  </div>
 
-  <div class="readme">
-    <h4>README.md</h4>
-    {{ project.description }}
-  </div>
-</section>
+    <div class="img2">
+      <img [src]="project.imgs[1].url" alt="" />
+    </div>
+
+    <div class="strapline">
+      <WavyIcon [stroke]="project.language.color"></WavyIcon>
+      <blockquote>
+        {{ project.description }}
+      </blockquote>
+    </div>
+
+    <div
+      class="img3"
+      [ngStyle]="{
+        'background-image': getUrl(project.cover.url)
+      }"
+    ></div>
+
+    <div class="cta-wrapper">
+      <div class="cta">
+        <h2>{{ project.name }}</h2>
+        <p>
+          {{ project.tag.name }} - {{ project.language.name }} -
+          {{ project.createdAt | date }}
+        </p>
+        <div class="icons">
+          <div class="stars">
+            <ngx-stars
+              [readonly]="true"
+              [size]="1"
+              [initialStars]="project.stars"
+              [maxStars]="5"
+              [color]="colors.extraColor1"
+            ></ngx-stars>
+          </div>
+          <span
+            ><HeartIcon [fill]="colors.secondary"></HeartIcon>
+            {{ project.likes | thousandSuff }}</span
+          >
+          <span
+            ><DownloadIcon [fill]="colors.dark"></DownloadIcon>
+            {{ project.ndownloads | thousandSuff }}</span
+          >
+        </div>
+        <div class="buttons">
+          <button
+            [ngStyle]="{ 'background-color': project.tag.color }"
+            class="btn btn--with-icon"
+          >
+            <CartIcon *ngIf="project.price !== 0"></CartIcon>
+            {{ project.price | currency: 'CAD':'symbol-narrow' | noPoint }}
+          </button>
+          <button class="btn btn--icon">
+            <HeartLikeIcon [fill]="colors.dark"></HeartLikeIcon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="readme">
+      <h4>README.md</h4>
+      {{ project.description }}
+    </div>
+  </section>
+
+  <section>
+    <h4>Comentarios</h4>
+    <ngx-stars
+      [color]="colors.extraColor1"
+      [readonly]="false"
+      [size]="3"
+      [initialStars]="0"
+      [maxStars]="5"
+      (ratingOutput)="onRatingSet($event)"
+    ></ngx-stars>
+    <span style="font-weight: bold; font-size: 20px"
+      >Rating is {{ ratingDisplay }} out of 5</span
+    >
+  </section>
+</ng-container>
+<ng-template #loading> ...cargando </ng-template>

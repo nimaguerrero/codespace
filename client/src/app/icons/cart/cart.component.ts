@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core'
 
 @Component({
-  selector: 'HeartLikeIcon',
-  templateUrl: './heart-like.component.svg'
+  selector: 'CartIcon',
+  templateUrl: './cart.component.svg'
 })
-export class HeartLikeIcon {
+export class CartIcon {
   @Input('fill') fill: string = '#fff'
   constructor() {}
 }

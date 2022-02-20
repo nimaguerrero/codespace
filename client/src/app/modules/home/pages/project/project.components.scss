@@ -1,3 +1,5 @@
+@use '~src/assets/scss/abstracts/colors' as c;
+
 blockquote {
   font: 1.1em/2 'Playfair Display', serif;
   font-style: italic;
@@ -18,36 +20,25 @@ blockquote {
   height: 40rem;
 }
 
-.strapline::before {
-  content: '';
-  display: block;
-  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/wavy.svg)
-    repeat-x;
-  background-size: cover;
-  width: 20%;
-  height: 0.5em;
-  position: absolute;
-  top: -3em;
-  left: 40%;
-}
-
-.cta h2 {
-  font: bold 4em/1 'Playfair Display', serif;
-  margin: 0 0 20px 0;
-  position: relative;
-}
-
-.button {
-  display: inline-block;
-  color: white;
-  text-decoration: none;
-  background: #292929;
-  padding: 0.8em 1.5em;
-  width: 100%;
-}
-
-.button:hover {
-  background: black;
+.cta {
+  h2 {
+    font: bold 4em/1 'Playfair Display', serif;
+    margin: 0 0 20px 0;
+    position: relative;
+    color: c.$dark-color;
+  }
+  p {
+    color: var(--color);
+  }
+  .icons {
+    display: flex;
+    gap: 0.9rem;
+    padding-bottom: 1rem;
+  }
+  .buttons {
+    display: flex;
+    gap: 0.9rem;
+  }
 }
 
 /* grid */

@@ -1,0 +1,220 @@
+{
+  "clients": [
+    {
+      "id": "61f5f9de2a4945084854ccd4",
+      "name": "mrstems",
+      "country": "Peru",
+      "email": "roberto971968@hotmail.com",
+      "password": "$2a$10$MtU/xYUWM4e33aa0kIb5rOO61rvqlFFaFIXXZDKxKy6qniXSUPuh.",
+      "profile": {
+        "url": "https://images.pexels.com/photos/2777898/pexels-photo-2777898.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+        "public_id": "test1"
+      },
+      "active": true,
+      "test": false,
+      "createdAt": "2022-01-30T02:37:18.593Z",
+      "updatedAt": "2022-01-30T02:37:18.593Z",
+      "__v": 0
+    },
+    {
+      "id": "62076f66a1dffcc7367443bb",
+      "name": "Jane Rodriguez",
+      "country": "Peru",
+      "email": "roberto971968@hotmail.com",
+      "password": "$2a$10$MtU/xYUWM4e33aa0kIb5rOO61rvqlFFaFIXXZDKxKy6qniXSUPuh.",
+      "profile": {
+        "url": "https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+        "public_id": "test1"
+      },
+      "active": true,
+      "test": false,
+      "createdAt": "2022-01-30T02:37:18.593Z",
+      "updatedAt": "2022-01-30T02:37:18.593Z",
+      "__v": 0
+    },
+    {
+      "id": "62076f97a1dffcc7367443d3",
+      "name": "Axel Rose",
+      "country": "Peru",
+      "email": "roberto971968@hotmail.com",
+      "password": "$2a$10$MtU/xYUWM4e33aa0kIb5rOO61rvqlFFaFIXXZDKxKy6qniXSUPuh.",
+      "profile": {
+        "url": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+        "public_id": "test1"
+      },
+      "active": true,
+      "test": false,
+      "createdAt": "2022-01-30T02:37:18.593Z",
+      "updatedAt": "2022-01-30T02:37:18.593Z",
+      "__v": 0
+    }
+  ],
+  "projects": [
+    {
+      "id": "61f8c39d5239c8cd89fead01",
+      "name": "proyecto1",
+      "tag": {
+        "name": "Proyecto",
+        "icon": "",
+        "color": "#ffb900"
+      },
+      "language": {
+        "name": "React",
+        "icon": "",
+        "color": "#198c7b"
+      },
+      "likes": 143,
+      "ndownloads": 1200,
+      "author": "61f5f9de2a4945084854ccd4",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but ",
+      "imgs": [
+        {
+          "url": "https://images.pexels.com/photos/8373866/pexels-photo-8373866.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+          "public_id": "test1"
+        },
+        {
+          "url": "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+          "public_id": "test1"
+        }
+      ],
+      "cover": {
+        "url": "https://res.cloudinary.com/gigga/image/upload/v1644561213/codespace/projects/test1_zlzsqr.jpg",
+        "public_id": "codespace/projects/test1_zlzsqr"
+      },
+      "preview": "",
+      "download": "Landing-Page-master.zip",
+      "price": 15,
+      "stars": 3,
+      "state": "Edicion",
+      "createdAt": "2021-10-15T06:26:18.316Z",
+      "updatedAt": "2021-12-13T05:49:56.427Z",
+      "__v": 0
+    },
+    {
+      "id": "62057817a07b65219ef8ab04",
+      "name": "Login - React",
+      "tag": {
+        "name": "Componente",
+        "icon": "",
+        "color": "#11468f"
+      },
+      "language": {
+        "name": "React",
+        "icon": "",
+        "color": "#198c7b"
+      },
+      "likes": 14,
+      "ndownloads": 12000,
+      "author": "62076f97a1dffcc7367443d3",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      "imgs": [
+        {
+          "url": "https://images.pexels.com/photos/276259/pexels-photo-276259.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+          "public_id": "test1"
+        },
+        {
+          "url": "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+          "public_id": "test1"
+        }
+      ],
+      "cover": {
+        "url": "https://images.pexels.com/photos/3585090/pexels-photo-3585090.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+        "public_id": "codespace/no-image_dgujkr_ymzbux"
+      },
+      "preview": "",
+      "download": "Login-component.zip",
+      "price": 5000,
+      "stars": 3,
+      "state": "Edicion",
+      "createdAt": "2022-02-01T06:26:18.316Z",
+      "updatedAt": "2022-02-02T05:49:56.427Z",
+      "__v": 0
+    },
+    {
+      "id": "620579a0a07b65219ef8aba4",
+      "name": "Api para hoteles",
+      "tag": {
+        "name": "Api",
+        "icon": "",
+        "color": "#f0077b"
+      },
+      "language": {
+        "name": "C#",
+        "icon": "",
+        "color": "#7f58c7"
+      },
+      "likes": 234,
+      "ndownloads": 4200,
+      "author": "62076f97a1dffcc7367443d3",
+      "description": "eiowrijwjreowijrwwreworjewioj",
+      "imgs": [
+        {
+          "url": "https://images.pexels.com/photos/6476808/pexels-photo-6476808.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+          "public_id": ""
+        },
+        {
+          "url": "https://images.pexels.com/photos/5082579/pexels-photo-5082579.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+          "public_id": ""
+        }
+      ],
+      "cover": {
+        "url": "https://images.pexels.com/photos/5082579/pexels-photo-5082579.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+        "public_id": "codespace/no-image_dgujkr_ymzbux"
+      },
+      "preview": "",
+      "download": "Login-component.zip",
+      "price": 300.45,
+      "stars": 3,
+      "state": "Edicion",
+      "createdAt": "2022-02-01T06:26:18.316Z",
+      "updatedAt": "2022-02-02T05:49:56.427Z",
+      "__v": 0
+    }
+  ],
+  "settings": [
+    {
+      "id": "61f43a2350a46138027900f0",
+      "tags": [
+        {
+          "name": "Proyecto",
+          "icon": "<ion-icon name='newspaper-outline'></ion-icon>",
+          "color": "#ffb900"
+        },
+        {
+          "name": "Api",
+          "icon": "<ion-icon name='cloud-circle-outline'></ion-icon>",
+          "color": "#f0077b"
+        },
+        {
+          "name": "Componente",
+          "icon": "<ion-icon name='hardware-chip-outline'></ion-icon>",
+          "color": "#11468f"
+        }
+      ],
+      "languages": [
+        {
+          "name": "React",
+          "icon": "<ion-icon name='logo-react'></ion-icon>",
+          "color": "#198c7b"
+        },
+        {
+          "name": "Angular",
+          "icon": "<ion-icon name='logo-angular'></ion-icon>",
+          "color": "#da1212"
+        },
+        {
+          "name": "C#",
+          "icon": "<ion-icon name='logo-angular'></ion-icon>",
+          "color": "#7f58c7"
+        }
+      ],
+      "igv": 10,
+      "logo": {
+        "url": "https://res.cloudinary.com/gigga/image/upload/v1644437255/codespace/logo_o5uwtj.svg",
+        "public_id": "codespace/logo_o5uwtj"
+      },
+      "serie": "001",
+      "correlative": "000001"
+    }
+  ]
+}

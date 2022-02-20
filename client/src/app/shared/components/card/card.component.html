@@ -5,78 +5,72 @@
     'background-image': getUrl(project)
   }"
 >
-  <div class="card__header">
-    <div class="card__date fw-300">
-      <p>
-        {{ formatDate(project.createdAt) }}
-      </p>
+  <header>
+    <div class="date" [style.--color]="project.tag.color">
+      {{ formatDate(project.createdAt) }}
     </div>
-  </div>
+    <div class="icons">
+      <div class="icon stars t5">
+        <span>{{ project.stars }}</span>
+        <StarIcon></StarIcon>
+      </div>
+      <div class="icon downloads t5">
+        <span>{{ project.ndownloads | thousandSuff }}</span>
+        <DownloadIcon></DownloadIcon>
+      </div>
+      <div class="icon likes t5">
+        <span>{{ project.likes | thousandSuff }}</span>
+        <HeartIcon></HeartIcon>
+      </div>
+    </div>
+  </header>
 
-  <div class="card__tags">
-    <div
-      [style.--tag-bfcolor]="project.language.color"
-      class="card__tag fw-300"
-    >
-      {{ project.language.name }}
+  <div class="container">
+    <div class="tags">
+      <div [style.--color]="project.language.color" class="tag fw-300">
+        {{ project.language.name }}
+      </div>
+      <div [style.--color]="project.tag.color" class="tag fw-300">
+        {{ project.tag.name }}
+      </div>
     </div>
-    <div [style.--tag-bfcolor]="project.tag.color" class="card__tag fw-300">
-      {{ project.tag.name }}
-    </div>
-  </div>
-  <div class="card__icons">
-    <div class="downloads">
-      <DownloadIcon></DownloadIcon>
-      {{ project.ndownloads | thousandSuff }}
-    </div>
-    <div class="stars">
-      <StarIcon></StarIcon>
-      {{ project.stars }}
-    </div>
-    <div class="likes">
-      <HeartIcon></HeartIcon>
-      {{ project.likes | thousandSuff }}
-    </div>
-  </div>
-  <div class="card__contain">
-    <footer>
-      <div class="contain">
+    <div class="content">
+      <div class="line">
         <div class="circle-author">
           <img [src]="project.author.profile.url" alt="" />
         </div>
-        <div class="content">
-          <h3 class="title">{{ project.name }}</h3>
-          <!-- <p class="text fw-200">{{ project.description.slice(0, 20) }}...</p> -->
+        <div class="text">
+          <h3 class="t4">{{ project.name }}</h3>
+          <p>ewhiorhewiohriewhrioewhiorehw</p>
         </div>
-        <button
-          [ngStyle]="{ 'background-color': project.tag.color }"
-          class="btn btn--primary"
-        >
-          {{ project.price | currency: 'CAD':'symbol-narrow' | noPoint }}
-        </button>
-        <!-- <div class="circle-price">
-          <span>
-
-          </span>
-        </div> -->
       </div>
-      <div
-        class="icons"
-        [ngStyle]="{ 'border-top': selectBorderColor(project.tag.color) }"
+      <button
+        [ngStyle]="{ 'background-color': project.tag.color }"
+        class="btn btn--with-icon"
       >
-        <div class="likes">
-          <HeartLikeIcon></HeartLikeIcon>
-          Me gusta
-        </div>
-        <div class="share">
-          <ShareIcon></ShareIcon>
-          Compartir
-        </div>
-        <div class="see-video">
-          <VideoIcon></VideoIcon>
-          Ver video
-        </div>
-      </div>
-    </footer>
+        <CartIcon *ngIf="project.price !== 0"></CartIcon>
+        {{ project.price | currency: 'CAD':'symbol-narrow' | noPoint }}
+      </button>
+    </div>
   </div>
+
+  <footer>
+    <div
+      class="icons"
+      [ngStyle]="{ 'border-top': selectBorderColor(project.tag.color) }"
+    >
+      <div class="likes">
+        <HeartLikeIcon></HeartLikeIcon>
+        Me gusta
+      </div>
+      <div class="share">
+        <ShareIcon></ShareIcon>
+        Compartir
+      </div>
+      <div class="see-video">
+        <VideoIcon></VideoIcon>
+        Ver video
+      </div>
+    </div>
+  </footer>
 </div>

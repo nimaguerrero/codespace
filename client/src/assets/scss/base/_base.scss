@@ -1,15 +1,28 @@
-@use "../abstracts/colors" as c;
-@use "../abstracts/breakpoints" as bp;
-@use "../base/typography" as t;
-@use "sass:math";
+@use '../abstracts/colors' as c;
+@use '../abstracts/breakpoints' as bp;
+@use '../base/typography' as t;
+@use 'sass:math';
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   scroll-behavior: smooth;
   background-color: c.$body-color;
   color: c.$text-color;
   min-height: 100vh;
   font-size: t.$base-font;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.gap-1 {
+  gap: 1rem;
 }
 
 h1,

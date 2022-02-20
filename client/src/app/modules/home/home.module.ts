@@ -8,6 +8,8 @@ import { SharedModule } from '@shared/shared.module'
 import { ModalCardPayComponent } from './components/modal-card-pay/modal-card-pay.component'
 import { HomeComponent } from './home.component'
 import { IconsModule } from '@app/icons/icons.module'
+import { NgxStarsModule } from 'ngx-stars'
+import { ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -17,7 +19,14 @@ import { IconsModule } from '@app/icons/icons.module'
     // COMPONENTS
     ModalCardPayComponent
   ],
-  imports: [CommonModule, HomeRoutingModule, SharedModule, IconsModule],
+  imports: [
+    CommonModule,
+    HomeRoutingModule,
+    SharedModule,
+    IconsModule,
+    NgxStarsModule,
+    ReactiveFormsModule
+  ],
   exports: [
     HomeComponent,
     ProjectComponent,

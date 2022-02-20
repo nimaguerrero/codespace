@@ -21,11 +21,12 @@ export class CardComponent implements OnInit {
   }
 
   getUrl(project: Project) {
-    if (project.cover) {
-      return `linear-gradient(315deg, rgba(20, 22, 24, .8) 0%, rgba(20, 22, 24, .6) 74%), url(${project.cover.url})`
-    } else {
-      return `linear-gradient(315deg, rgba(20, 22, 24, .8) 0%, rgba(20, 22, 24, .6) 74%), url(${'https://res.cloudinary.com/gigga/image/upload/v1637945294/mrstems/youtube_spxhbp.gif'})`
-    }
+    return `linear-gradient(315deg, rgba(20, 22, 24, .5) 0%, rgba(20, 22, 24, .5) 74%), url(${project.cover.url})`
+    // if (project.cover) {
+    // return `linear-gradient(315deg, rgba(20, 22, 24, .8) 0%, rgba(20, 22, 24, .6) 74%), url(${project.cover.url})`
+    // } else {
+    //   return `linear-gradient(315deg, rgba(20, 22, 24, .8) 0%, rgba(20, 22, 24, .6) 74%), url(${'https://res.cloudinary.com/gigga/image/upload/v1637945294/mrstems/youtube_spxhbp.gif'})`
+    // }
   }
 
   selectBorderColor(color: string) {

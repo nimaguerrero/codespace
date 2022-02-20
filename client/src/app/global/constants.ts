@@ -35,3 +35,14 @@ export const OTHERFILTERS = {
     { name: 'Comunidad', route: 'author' }
   ]
 }
+
+export const COLORS = {
+  primary: '#041562',
+  secondary: '#da1212',
+  third: '#11468f',
+  dark: '#141618',
+  text: '#53575a',
+  textAlt: '#282d31',
+  extraColor1: '#ffb900',
+  extraColor2: '#5bad10'
+}

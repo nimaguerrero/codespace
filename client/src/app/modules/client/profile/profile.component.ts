@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit, OnDestroy, DoCheck {
   constructor(
     private render: Renderer2,
     private fb: FormBuilder,
-    public uS: UserService,
+    // public uS: UserService,
     private profileServ: ProfileService,
     private toastr: ToastrService
   ) {
@@ -48,11 +48,11 @@ export class ProfileComponent implements OnInit, OnDestroy, DoCheck {
 
   ngOnInit(): void {
     this.getClient()
-    this.subs.add(
-      this.uS
-        .getProfile()
-        .subscribe((profileUrl) => (this.profileUrl = profileUrl))
-    )
+    // this.subs.add(
+    //   this.uS
+    //     .getProfile()
+    //     .subscribe((profileUrl) => (this.profileUrl = profileUrl))
+    // )
   }
 
   ngDoCheck(): void {
@@ -70,6 +70,7 @@ export class ProfileComponent implements OnInit, OnDestroy, DoCheck {
       this.profileServ.getClient().subscribe(({ profile, ...data }) => {
         this.client = data
         this.imgSelect = profile.url
+        this.profileUrl = profile.url
         this.public_id = profile.public_id
 
         this.fc.controlSet('nameProfileForm', this.client.name)

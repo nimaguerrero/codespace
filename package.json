@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon index.js",
     "start": "cross-env NODE_ENV=production node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "json": "json-server --watch data/db.json"
   },
   "eslintConfig": {
     "extends": "standard"
@@ -38,6 +39,7 @@
     "uuid": "8.3.2"
   },
   "devDependencies": {
+    "json-server": "^0.17.0",
     "nodemon": "2.0.13",
     "standard": "^16.0.4"
   }

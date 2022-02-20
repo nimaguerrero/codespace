@@ -14,34 +14,25 @@
       </li>
       <li class="sidebar__item">
         <a
-          [routerLink]="['/songs/tag/acapella']"
-          routerLinkActive="router-link-active"
-          class="sidebar__link t3"
           (click)="openSidebar()"
-          >Acapellas
+          class="sidebar__link t3"
+          [routerLink]="['/projects/join-us']"
+          routerLinkActive="router-link-active"
+          >Únetenos
           <span><i></i></span>
         </a>
       </li>
       <li class="sidebar__item">
         <a
-          [routerLink]="['/songs/tag/instrumental']"
-          routerLinkActive="router-link-active"
-          class="sidebar__link t3"
           (click)="openSidebar()"
-          >Instrumentales
+          class="sidebar__link t3"
+          [routerLink]="['/projects/about']"
+          routerLinkActive="router-link-active"
+          >Sobre nosotros
           <span><i></i></span>
         </a>
       </li>
-      <li class="sidebar__item">
-        <a
-          [routerLink]="['/songs/tag/stems']"
-          routerLinkActive="router-link-active"
-          class="sidebar__link t3"
-          (click)="openSidebar()"
-          >Stems
-          <span><i></i></span>
-        </a>
-      </li>
+
       <li class="sidebar__item">
         <a
           *ngIf="uS.isLogged()"
@@ -85,7 +76,7 @@
       <li class="nav__item">
         <a
           class="text-sm"
-          [routerLink]="['/projects/tag/acapella']"
+          [routerLink]="['/projects/join-us']"
           routerLinkActive="router-link-active"
           >Únetenos
         </a>
@@ -93,7 +84,7 @@
       <li class="nav__item">
         <a
           class="text-sm"
-          [routerLink]="['/projects/tag/acapella']"
+          [routerLink]="['/projects/about']"
           routerLinkActive="router-link-active"
           >Sobre nosotros
         </a>

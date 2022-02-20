@@ -29,6 +29,7 @@
     "cross-env": "^7.0.3",
     "express": "^4.15.2",
     "moment": "^2.29.1",
+    "ngx-stars": "^1.5.1",
     "ngx-toastr": "^14.2.1",
     "rxjs": "~7.4.0",
     "sweetalert2": "^11.3.0",

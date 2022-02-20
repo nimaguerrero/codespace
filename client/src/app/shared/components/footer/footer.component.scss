@@ -1,5 +1,5 @@
-@use "~src/assets/scss/abstracts/colors" as c;
-@use "~src/assets/scss/abstracts/breakpoints" as bp;
+@use '~src/assets/scss/abstracts/colors' as c;
+@use '~src/assets/scss/abstracts/breakpoints' as bp;
 
 .footer {
   background-color: c.$dark-color;
@@ -7,7 +7,7 @@
     display: block;
   }
   .wave-path {
-    fill: c.$white-color;
+    fill: c.$body-color;
   }
   &__content {
     padding: 2rem;
@@ -67,8 +67,8 @@
     justify-content: flex-end;
     &__links {
       background-color: c.$primary-color;
-      --webkit-mask-image: url("../../../../assets/img/amoeba.svg");
-      mask-image: url("../../../../assets/img/amoeba.svg");
+      --webkit-mask-image: url('../../../../assets/img/amoeba.svg');
+      mask-image: url('../../../../assets/img/amoeba.svg');
       width: 14.75rem;
       height: 100%;
       display: flex;
