@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  env: 'Staging',
+  env: 'staging',
   apiUrl: 'http://localhost:3000',
   authimg:
     'https://res.cloudinary.com/gigga/image/upload/v1644437770/codespace/auth-img_ti4g16.jpg',

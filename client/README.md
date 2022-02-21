@@ -34,6 +34,10 @@
 - carousel
 - loading
 
+## Iconos svg como componentes
+
+> Aceptan un input (fill)="#000" y tienen un modulo para colocar los componentes
+
 ## Faltan (no se realiza aun)
 
 - checkout (detalle de los productos, la lista)

@@ -109,6 +109,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     this.page = page
     this.projects$ = this.projectsServ.getProjects(term, page, this.limit).pipe(
       map(({ projects, ...data }) => {
+        console.log(projects)
         this.loading = false
         this.pagination = { ...data, limit: this.limit }
         this.projects = projects

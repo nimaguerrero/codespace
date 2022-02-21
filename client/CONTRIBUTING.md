@@ -23,3 +23,5 @@
 - [List Mobile Library](https://github.com/leifermendez/swipe-angular-list)
 
 **Los enlaces son solo eso: referencia para que veas que es exactamente lo que se va a hacer en esa pagina no es necesario que se identico o se copie, solo es una idea**
+
+**Puedes usar el daily-notes.md para ver tareas diarias como una ayuda para que no te pierdas yo lo uso siempre**
